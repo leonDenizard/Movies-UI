@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style/index.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+    <title>Movies Concept</title>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <div class="wrapper-i"><i id="close" class="ph ph-x"></i></div>
+        <div class="header-start">
+
+          <div>
+            <h3>GII</h3>
+          </div>
+
+          <ul>
+            <li><a class="menu" href="#"><i class="ph-light ph-house-line"></i> Home</a></li>
+            <li><a href="#"><i class="ph-light ph-film-reel"></i>Movies</a></li>
+            <li><a href="#"><i class="ph-light ph-film-slate"></i>Series</a></li>
+            <li><a href="#"><i class="ph-light ph-heart"></i>Favourite</a></li>
+          </ul>
+          <ul>
+            <h4>Account</h4>
+            <li><a href="#"><i class="ph-light ph-user-circle"></i>Mbappe</a></li>
+          </ul>
+      
+        </div>
+        <div class="header-end">
+          <ul>
+            <a href="/login.html"><li><i class="ph ph-sign-out"></i><h5>Log Out</h5></li></a>
+          </ul>
+          
+        </div>
+      </nav>
+      <section>
+        <div class="wrapper-player">
+          <img src="./assets/lightyear.jpg" alt="" />
+        </div>
+
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="img-wrapper">
+                <img src="./assets/guardians.jpg" alt="Minha imagem" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-wrapper">
+                <img src="./assets/lightyear.jpg" alt="Minha outra imagem" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-wrapper">
+                <img src="./assets/mario.jpg" alt="Minha outra imagem" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-wrapper">
+                <img src="./assets/john2.jpg" alt="" id="lightyear" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-wrapper">
+                <img src="./assets/john.jpg" alt="" id="lightyear" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-wrapper">
+                <img src="./assets/shazam.jpg" alt="" id="lightyear" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-wrapper">
+                <img src="./assets/mandalorian.jpg" alt="" id="lightyear" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-wrapper">
+                <img src="./assets/cliff.png" alt="" id="lightyear" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="img-wrapper">
+                <img src="./assets/spider.jpg" alt="" id="lightyear" />
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </section>
+    </main>
+
+    <script src="./src/index.js"></script>
+    <!-- <script src="./swipper.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    
+    <script>
+      var swiper = new Swiper(".swiper-container", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+          rotate: 20,
+          stretch: 0,
+          depth: 200,
+          modifier: 1,
+          slideShadows: true,
+          
+        },
+        loop: true,
+        
+        navigation: {
+          prevEl: ".swiper-button-prev",
+          nextEl: ".swiper-button-next",
+          
+        },
+      });
+    </script>
+  </body>
+</html>
