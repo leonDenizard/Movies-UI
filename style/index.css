@@ -8,36 +8,166 @@
   text-decoration: none;
   font-family: "Golos Text", sans-serif;
   user-select: none;
+  color: #fff;
 }
 
 :root{
+  --background-color: #201e2a;
   --border-color: rgba(255, 255, 255, 0.5);
-  --backgound-img-degrade: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0.01));
-  --filter: drop-shadow(0 0 5px #FFF)
-  --text-color: #FFF
+  --backgound-img-degrade: linear-gradient(to top, transparent, rgba(32, 30, 42, 1)80%);
+  --filter: drop-shadow(0 0 5px #FFF);
+  --text-color: #FFF;
   --box-shadow: 0px 28px 30px 0px rgba(0, 0, 0, 0.85);
 }
 
 
 @media (width >=320px) and (width <= 480px){
-  body{
+
+  body {
+    min-height: 100dvh;
+    background-color: #201e2a;
+    overflow: hidden;
+  }
+
+  header {
+    position: relative;
+  }
+  header > img{
+    position: absolute;
+    opacity: 0.8;
+    width: 100%;
+    object-fit: contain;
+    -webkit-mask-image: var(--backgound-img-degrade);
     
   }
+  .container-icon{
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    z-index: 2;
+  }
+  .container-icon span{
+    position: absolute;
+    top: 25px;
+    width: 35px;
+    height: 3px;
+    right: 9px;
+    background-color: var(--text-color);
+    border-radius: 20px;
+  }
+  .container-icon span:nth-child(2){
+    top: 15px;
+    width: 30px;
+    right: 9px;
+  }
+  .container-icon span:nth-child(3){
+    top: 35px;
+    width: 20px;
+    right: 9px;
+  }
+  .wrapper-menu{
+    position: absolute;
+    right: 0;
+    backdrop-filter: blur(10px);
+    width: 80%;
+    height: 100dvh;
+    padding: 1em;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+  .wrapper-menu.active{
+    opacity: 0;
+  }
+
+  .sigin{
+    width: 100%;
+    position: relative;
+    top: 4em;
+  }
+
+  .sigin h2{
+
+    font-size: 2em;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  
+  .sigin a:not(a#recover-password){
+    
+    margin-top: 2em;
+    display: block;
+    width: 100%;
+    height: 3em;
+    display: grid;
+    place-items: center;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    font-size: 1.1em;
+    letter-spacing: 2px;
+    border-radius: 10px;
+  }
+
+  .sigin .wrapper-recover{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5em;
+    font-size: 1em;
+    opacity: 0.8;
+  }
+
+  .sigin .dont-account{
+    margin-top: 8em;
+  }
+
+
 }
 
-@media (width >= 480px) and (width <= 768px) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (width >= 481px) and (width <= 768px) {
   body{
     background-color: black;
   }
 }
 
-@media (width >= 768px ) and (width <= 992px) {
+@media (width >= 769px ) and (width <= 992px) {
   body{
     background-color: blue;
   }
 }
 
-@media (width >= 992px ) and (width <= 1200px) {
+@media (width >= 999px ) and (width <= 1200px) {
   body{
     background-color: yellow;
   }
