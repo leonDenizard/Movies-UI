@@ -1,7 +1,12 @@
 const btnmenu = document.querySelector('.container-icon')
-const wrapperMenu = document.querySelector('.wrapper-menu')
+const header = document.querySelector('header')
+
+
+console.log('kcdpewokjpoe')
+
 
 function toggleMenu(){
-  wrapperMenu.classList.toggle('active')
+  header.classList.toggle('active')
 }
 btnmenu.addEventListener('click', toggleMenu)
+

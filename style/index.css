@@ -7,7 +7,7 @@
   list-style: none;
   text-decoration: none;
   font-family: "Golos Text", sans-serif;
-  user-select: none;
+  /* user-select: none; */
   color: #fff;
 }
 
@@ -24,31 +24,42 @@
 @media (width >=320px) and (width <= 480px){
 
   body {
-    min-height: 100dvh;
-    background-color: #201e2a;
-    overflow: hidden;
-  }
-
-  header {
     position: relative;
+    min-height: 100dvh;
+    width: 100vw;
+    background-color: #201e2a;
+    overflow-x: hidden;
   }
-  header > img{
-    position: absolute;
-    opacity: 0.8;
+  body > img#background{
+    object-fit: cover;
     width: 100%;
-    object-fit: contain;
+    mask-image: var(--backgound-img-degrade);
     -webkit-mask-image: var(--backgound-img-degrade);
-    
   }
-  .container-icon{
+  /* Definido cabeçalho como absoluto em relação ao body */
+  header {
+    top: 0;
     position: absolute;
-    top: 10px;
-    right: 5px;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    backdrop-filter: blur(20px);
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  header.active {
+    opacity: 1;
+  }
+  
+
+  /* Estilazado o menu hamburguer */
+  .container-icon{
+    position: fixed;
+    top: 0;
+    right: 0;
     width: 50px;
     height: 50px;
-    display: grid;
-    place-items: center;
-    z-index: 2;
+    z-index: 3;
   }
   .container-icon span{
     position: absolute;
@@ -69,36 +80,29 @@
     width: 20px;
     right: 11px;
   }
+
+  /* Estilizando o conteúdo dentro do menu */
+
   .wrapper-menu{
-    position: absolute;
-    right: 0;
-    backdrop-filter: blur(10px);
-    width: 100%;
-    height: 100dvh;
-    padding: 1em;
-    overflow: hidden;
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
-  }
-  .wrapper-menu.active{
-    opacity: 0;
+    position: relative;
+    padding: min(0.5em);
   }
 
-  .content-menu{
+  .wrapper-menu .content-menu{
     position: relative;
+    top: 2em;
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 1em;
+    gap: 0.5em;
   }
   .welcomme{
     position: relative;
     width: 100%;
     text-align: center;
-    top: 2em;
   }
   .welcomme h2{
     font-size: 2em;
@@ -111,7 +115,7 @@
   }
 
   .wrapper-input{
-    margin-top: 2em;
+    margin-top: 1em;
     width: 100%;
   }
   .wrapper-input input{
@@ -160,19 +164,19 @@
   }
   .continue #left{
     display: block;
-    width: 100px;
+    width: 90px;
     height: 2px;
-    background-image: linear-gradient(to right, #201e2a, #fff);
+    background-image: linear-gradient(to right, transparent, #fff);
   }
   .continue #right{
     display: block;
-    width: 100px;
+    width: 90px;
     height: 2px;
-    background-image: linear-gradient(to left, #201e2a, #fff);
+    background-image: linear-gradient(to left, transparent, #fff);
   }
   .continue p{
     margin: 0 5px;
-    font-size: 0.9em;
+    font-size: 0.8em;
     line-height: 0.5em;
   }
 
@@ -206,8 +210,6 @@
     color: #fd6b6a;
     border-bottom: 1px solid #fd6b6a;
   }
-
-
 }
 
 
