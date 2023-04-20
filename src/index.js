@@ -1,8 +1,8 @@
 const btnmenu = document.querySelector('.container-icon')
 const header = document.querySelector('header')
+const swiper = document.querySelector('.swiper');
 
 
-console.log('kcdpewokjpoe')
 
 
 function toggleMenu(){
@@ -10,3 +10,18 @@ function toggleMenu(){
 }
 btnmenu.addEventListener('click', toggleMenu)
 
+
+function loadSwiper(){
+  const swiper = new Swiper('.swiper', {
+    effect: "cards",
+    cardsEffect:{
+      rotate: true,
+      perSlideRotate: 10,
+      slideShadows: true,
+    },
+    loop: true,
+  });
+}
+
+
+window.addEventListener('load', loadSwiper)

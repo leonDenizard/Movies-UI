@@ -40,7 +40,7 @@
   header {
     top: 0;
     position: absolute;
-    width: 100%;
+    right: 100%;
     height: 100vh;
     opacity: 0;
     backdrop-filter: blur(20px);
@@ -49,6 +49,8 @@
   
   header.active {
     opacity: 1;
+    right: 0;
+    z-index: 2;
   }
   
 
@@ -90,7 +92,7 @@
 
   .wrapper-menu .content-menu{
     position: relative;
-    top: 2em;
+    top: 6em;
     width: 100%;
     height: 100%;
     display: flex;
@@ -209,6 +211,33 @@
   .not-menber a{
     color: #fd6b6a;
     border-bottom: 1px solid #fd6b6a;
+  }
+
+  /* Estilização do container movies */
+
+  .container-movies{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    overflow: hidden;
+    gap: 2em;
+  }
+
+  .swiper{
+    height: 50vh;
+    width: 70vw;
+  }
+  .swiper-wrapper .swiper-slide{
+
+  }
+  .swiper-wrapper .swiper-slide > img{
+    position: relative;
+    border-radius: 10px;
+    height: 50vh;
+    width: 70vw;
+    object-fit: cover;
   }
 }
 
