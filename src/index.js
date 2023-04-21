@@ -15,7 +15,7 @@ btnmenu.addEventListener('click', toggleMenu)
 function atualizaBackground(movies, index){
   const movie = movies[index]
 
-  console.log(movie.backdrop_path)
+  console.log(movies, index)
   const imgBackground = document.querySelector('#background');
   if (imgBackground) {
     imgBackground.src = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`;
@@ -24,6 +24,7 @@ function atualizaBackground(movies, index){
 
 //Função responsável por iniciar o Swiper
 function loadSwiper(movies){
+  let currentIndex = 0
   const swiper = new Swiper('.swiper', {
     effect: "cards",
     cardsEffect:{
@@ -34,7 +35,8 @@ function loadSwiper(movies){
     loop: true,
     on:{
       slideChange: function(){
-        atualizaBackground(movies, this.activeIndex)
+        currentIndex = this.realIndex
+        atualizaBackground(movies, currentIndex)
       },
     },
   });
