@@ -14,7 +14,7 @@
 :root{
   --background-color: #201e2a;
   --border-color: rgba(255, 255, 255, 0.5);
-  --backgound-img-degrade: linear-gradient(to top, transparent, rgba(32, 30, 42, 1)80%);
+  --backgound-img-degrade: linear-gradient(to top, transparent, rgba(32, 30, 42, 1));
   --filter: drop-shadow(0 0 5px #FFF);
   --text-color: #FFF;
   --box-shadow: 0px 28px 30px 0px rgba(0, 0, 0, 0.85);
@@ -35,6 +35,7 @@
     width: 100%;
     mask-image: var(--backgound-img-degrade);
     -webkit-mask-image: var(--backgound-img-degrade);
+    transition: all 0.3s ease;
   }
   /* Definido cabeçalho como absoluto em relação ao body */
   header {
@@ -59,8 +60,8 @@
     position: fixed;
     top: 0;
     right: 0;
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     z-index: 3;
   }
   .container-icon span{
@@ -76,12 +77,132 @@
     top: 12px;
     width: 30px;
     right: 11px;
+    animation: width-animation2-reverse 0.8s forwards;
   }
   .container-icon span:nth-child(3){
     top: 28px;
     width: 20px;
     right: 11px;
+    animation: width-animation3-reverse 0.8s forwards;
   }
+
+  .container-icon span:nth-child(1){
+    animation: width-animation1-reverse 0.8s forwards;
+
+  }
+
+  .container-icon.active span:nth-child(1){
+    animation: width-animation1 0.2s forwards;
+  }
+  .container-icon.active span:nth-child(2){
+    animation: width-animation2 0.8s forwards, rotate-animation2 0.8s forwards 0.8s, top-animation2 0.8s forwards;
+  }
+  .container-icon.active span:nth-child(3){
+    animation: width-animation3 0.8s forwards, rotate-animation3 0.8s forwards 0.8s, top-animation3 0.8s forwards;
+  }
+
+  /* Animacao original */
+@keyframes width-animation1 {
+  0% {
+    width: 50%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+/* Animacao reversa */
+@keyframes width-animation1-reverse {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 35px;
+  }
+}
+
+/* Animacao original */
+@keyframes width-animation3 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 30px;
+  }
+}
+
+/* Animacao reversa */
+@keyframes width-animation3-reverse {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 20px;
+  }
+}
+
+/* Animacao original */
+@keyframes rotate-animation3 {
+  0% {
+    transform: none;
+  }
+  100% {
+    transform: rotate(-315deg);
+  }
+}
+
+/* Animacao original */
+@keyframes top-animation3 {
+  0% {
+    top: none;
+  }
+  100% {
+    top: 20px;
+  }
+}
+
+/* Animacao original */
+@keyframes width-animation2 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 30px;
+  }
+}
+
+/* Animacao reversa */
+@keyframes width-animation2-reverse {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 30px;
+  }
+}
+
+/* Animacao original */
+@keyframes rotate-animation2 {
+  0% {
+    transform: none;
+  }
+  100% {
+    transform: rotate(315deg);
+  }
+}
+
+/* Animacao original */
+@keyframes top-animation2 {
+  0% {
+    top: none;
+  }
+  100% {
+    top: 20px;
+  }
+}
+
+
+
 
   /* Estilizando o conteúdo dentro do menu */
 
@@ -124,7 +245,7 @@
     margin-top: 1em;
     width: 100%;
     height: 2em;
-    padding: 1.5em;
+    padding: 1.8em;
   }
   input{
     border: 1px solid var(--border-color);
@@ -150,12 +271,12 @@
   .sigin a{
     height: 2em;
     border-radius: 5px;
-    padding: 1.5em;
+    padding: 1.8em;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #fd6b6a;
-    box-shadow: 0px 32px 50px -20px rgba(253, 107, 106, 0.76);
+    box-shadow: 0px 32px 50px -30px rgba(253, 107, 106, 0.76);
   }
   .continue{
     width: 100%;
@@ -230,20 +351,20 @@
     font-weight: 500;
     letter-spacing: 1px;
     font-family: 'Righteous';
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
   }
 
   .swiper{
     height: 50vh;
-    width: 70vw;
+    width: 65vw;
   }
-  .swiper-wrapper .swiper-slide{
 
-  }
   .swiper-wrapper .swiper-slide > img{
     position: relative;
     border-radius: 10px;
     height: 50vh;
-    width: 70vw;
+    width: 65vw;
     object-fit: cover;
   }
 }

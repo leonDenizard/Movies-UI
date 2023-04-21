@@ -8,6 +8,7 @@ const swiperWrapper = document.querySelector('.swiper-wrapper')
 //Função responsavél por abrir e fechar o menu do navbar
 function toggleMenu(){
   header.classList.toggle('active')
+  btnmenu.classList.toggle('active')
 }
 btnmenu.addEventListener('click', toggleMenu)
 
