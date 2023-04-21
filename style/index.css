@@ -21,7 +21,7 @@
 }
 
 
-@media (width >=320px) and (width <= 480px){
+@media (max-width: 480px){
 
   body {
     position: relative;
