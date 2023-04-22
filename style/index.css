@@ -12,9 +12,9 @@
 }
 
 :root{
-  --background-color: #201e2a;
+  --background-color: #0a0908;
   --border-color: rgba(255, 255, 255, 0.5);
-  --backgound-img-degrade: linear-gradient(to top, transparent, rgba(32, 30, 42, 1));
+  --backgound-img-degrade: linear-gradient(to top, transparent, #0a0908);
   --filter: drop-shadow(0 0 5px #FFF);
   --text-color: #FFF;
   --box-shadow: 0px 28px 30px 0px rgba(0, 0, 0, 0.85);
@@ -27,8 +27,8 @@
     position: relative;
     min-height: 100dvh;
     width: 100vw;
-    background-color: #201e2a;
-    overflow-x: hidden;
+    background-color: var(--background-color);
+    overflow: hidden;
   }
   body > img#background{
     object-fit: cover;
@@ -69,7 +69,7 @@
     position: absolute;
     top: 20px;
     width: 35px;
-    height: 2px;
+    height: 3px;
     right: 11px;
     background-color: var(--text-color);
     border-radius: 20px;
@@ -338,13 +338,15 @@
   /* Estilização do container movies */
 
   .container-movies{
+    position: relative;
+    top: 2em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     max-width: 100%;
     overflow: hidden;
-    gap: 2em;
+    gap: 3.5em;
   }
   .container-movies h1{
 
@@ -368,6 +370,67 @@
     width: 65vw;
     object-fit: cover;
   }
+
+  nav.container-navigation{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+
+  }
+
+  .container-navigation > ul{
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    height: 3.3em;
+    width: 80%;
+    overflow: hidden;
+    /* border-left: 1px solid #fff;
+    border-right: 1px solid #fff; */
+  }
+  .container-navigation > ul::before{
+    position: absolute;
+    content: '';
+    top: 0;
+    width: 100%;
+    height: 2px;
+    background-image: linear-gradient(to left, transparent, #fff, transparent);
+  }
+  .container-navigation > ul::after{
+    position: absolute;
+    content: '';
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-image: linear-gradient(to left, transparent, #fff, transparent);
+  }
+  .container-navigation > ul > li{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container-navigation > ul > li > a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container-navigation > ul > li > a > i{
+    font-size: 2em;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+
 }
 
 
