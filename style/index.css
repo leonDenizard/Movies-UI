@@ -28,7 +28,7 @@
     min-height: 100dvh;
     width: 100vw;
     background-color: var(--background-color);
-    overflow: hidden;
+    overflow-x: hidden;
   }
   body > img#background{
     object-fit: cover;
