@@ -365,15 +365,16 @@
 
   .swiper-wrapper .swiper-slide > img{
     position: relative;
-    border-radius: 10px;
+    border-radius: 20px;
     height: 50vh;
     width: 65vw;
     object-fit: cover;
+    /* border: 1px solid rgba(255, 255, 255, 0.3); */
   }
 
   nav.container-navigation{
     position: fixed;
-    bottom: 0;
+    bottom: 1px;
     left: 0;
     width: 100%;
     z-index: 1;
@@ -400,15 +401,16 @@
     content: '';
     top: 0;
     width: 100%;
-    height: 2px;
+    height: 1px;
     background-image: linear-gradient(to left, transparent, #fff, transparent);
+    border-radius: 5px;
   }
   .container-navigation > ul::after{
     position: absolute;
     content: '';
     bottom: 0;
     width: 100%;
-    height: 2px;
+    height: 1px;
     background-image: linear-gradient(to left, transparent, #fff, transparent);
   }
   .container-navigation > ul > li{

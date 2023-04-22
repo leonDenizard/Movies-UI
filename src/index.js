@@ -15,8 +15,6 @@ btnmenu.addEventListener('click', toggleMenu)
 // Função global atualizaBackground
 function atualizaBackground(movies, index){
   const movie = movies[index]
-
-  console.log(movies, index)
   const imgBackground = document.querySelector('#background');
   if (imgBackground) {
     imgBackground.src = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`;
