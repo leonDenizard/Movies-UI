@@ -24,11 +24,24 @@ function atualizaBackground(movies, index){
 //Função responsável por iniciar o Swiper
 function loadSwiper(movies){
   let currentIndex = 0
+  let swiperEffect = 'cards'
+
+  if(window.innerWidth > 468 && window.innerWidth <= 768){
+    swiperEffect = 'coverflow'
+  }
   const swiper = new Swiper('.swiper', {
-    effect: "cards",
+    effect: swiperEffect,
     cardsEffect:{
       rotate: true,
       perSlideRotate: 10,
+      slideShadows: true,
+      loop: true
+    },
+    coverflowEffect: {
+      rotate: 20,
+      stretch: 0,
+      depth: 200,
+      modifier: 1,
       slideShadows: true,
     },
     loop: true,
