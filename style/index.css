@@ -870,7 +870,7 @@
 }
 
 
-@media (min-width: 769px ) and (max-width: 1440px) {
+@media (min-width: 769px ) and (max-width: 3440px) {
   body{
     position: relative;
     min-height: 100vh;
