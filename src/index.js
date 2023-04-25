@@ -47,6 +47,11 @@ function atualizaDataLancamento(datas, index){
   spanDataLancamento.textContent = `${dataFormatada} (BR)`
 
 }
+function atualizaGenero(generos, index) {
+  const movieGeneros = document.querySelector('#movie-genres')
+  movieGeneros.textContent = generos[index]
+}
+
 
 //função cria slide do swiper
 function criaSwiperSlideImg(src){
@@ -65,7 +70,7 @@ function criaSwiperSlideImg(src){
 let swiper; // variável global
 
 //Função responsável por iniciar o Swiper
-function loadSwiper(movies, titles, ano, datas){
+function loadSwiper(movies, titles, ano, datas, generos){
   let currentIndex = 0
   let swiperEffect = 'cards'
 
@@ -98,6 +103,7 @@ function loadSwiper(movies, titles, ano, datas){
         atualizaTitulo(titles, currentIndex)
         atualizaAno(ano, currentIndex)
         atualizaDataLancamento(datas, currentIndex)
+        atualizaGenero(generos, currentIndex)
       },
     },
   });
@@ -105,7 +111,29 @@ function loadSwiper(movies, titles, ano, datas){
 
 const key = 'fd298ef799ed7bc469fd73887cdfcc2e'
 const api = `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc`
-const apiCertification = `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=pt-BR&page=1`
+
+const generosTotal = {
+  28: 'Ação',
+  12: 'Aventura',
+  16: 'Animação',
+  35: 'Comédia',
+  80: 'crime',
+  99: 'Documentário',
+  18: 'Drama',
+  10751: 'Familia',
+  14: 'Fantasia',
+  36: 'História',
+  27: 'Terror',
+  10402: 'Música',
+  9648: 'Mistério',
+  10749: 'Romance',
+  878: 'Ficção científica',
+  10770: 'Cinema TV',
+  53: 'Thriller',
+  10752: 'Guerra',
+  37: 'Faroeste'
+};
+
 async function loadMovies(){
 
   try {
@@ -125,8 +153,10 @@ async function loadMovies(){
     //criando um array de datas
     const datas = movies.map(movie => movie.release_date)
 
+    const generos = movies.map(movie => movie.genre_ids.map(genreId => generosTotal[genreId]).join(', '));
+    
     // Iniciando o Swiper e atualizando o background com o primeiro filme
-    loadSwiper(movies, titles, ano, datas)
+    loadSwiper(movies, titles, ano, datas, generos)
     atualizaBackground(movies, 0)
     //Carrega titulo do filme
     atualizaTitulo(titles, 0)
@@ -134,8 +164,8 @@ async function loadMovies(){
     atualizaAno(ano, 0)
     //carrega data de lançamento
     atualizaDataLancamento(datas, 0)
-
-    console.log(movies[0])
+    //carrego generos em cada filme
+    atualizaGenero(generos, 0)
     
     
   } catch (error) {
