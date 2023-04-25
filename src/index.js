@@ -1,9 +1,6 @@
 const btnmenu = document.querySelector('.container-icon')
 const header = document.querySelector('header')
-const swiper = document.querySelector('.swiper')
 const swiperWrapper = document.querySelector('.swiper-wrapper')
-
-
 
 //Função responsavél por abrir e fechar o menu do navbar
 function toggleMenu(){
@@ -12,14 +9,40 @@ function toggleMenu(){
 }
 btnmenu.addEventListener('click', toggleMenu)
 
-// Função global atualizaBackground
+
+//Declaração do caminho da imagem e tamanho
+const linkImagens = 'https://image.tmdb.org/t/p/'
+const img1280 = 'w1280'
+const imgPoster = 'w500'
+const imgOriginal = 'original'
+
+// Função responsavel por atualizaBackground do fundo da pagina
 function atualizaBackground(movies, index){
+
   const movie = movies[index]
   const imgBackground = document.querySelector('#background');
-  if (imgBackground) {
-    imgBackground.src = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`;
-  }
+
+  imgBackground.src = `${linkImagens}${img1280}${movie.backdrop_path}`;
+  
 }
+
+
+
+//função cria slide do swiper
+function criaSwiperSlideImg(src){
+
+  const swiperSlide = document.createElement('div')
+  swiperSlide.classList.add('swiper-slide')
+  swiperWrapper.appendChild(swiperSlide)
+
+  const img = document.createElement('img')
+  img.src = src
+
+  swiperSlide.appendChild(img)
+}
+
+//Função responsável por iniciar o Swiper
+let swiper; // variável global
 
 //Função responsável por iniciar o Swiper
 function loadSwiper(movies){
@@ -29,7 +52,7 @@ function loadSwiper(movies){
   if(window.innerWidth > 468 && window.innerWidth <= 768){
     swiperEffect = 'coverflow'
   }
-  const swiper = new Swiper('.swiper', {
+  swiper = new Swiper('.swiper', {
     effect: swiperEffect,
     cardsEffect:{
       rotate: true,
@@ -66,13 +89,18 @@ async function loadMovies(){
 
     // Criando os slides do Swiper
     movies.forEach(movie => {
-      criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`)
+      criaSwiperSlideImg(`${linkImagens}${imgPoster}${movie.poster_path}`)
     })  
 
     // Iniciando o Swiper e atualizando o background com o primeiro filme
     loadSwiper(movies)
+    
+   
     atualizaBackground(movies, 0)
+   
+    
 
+    
   } catch (error) {
     console.log(error)
   }
@@ -80,23 +108,4 @@ async function loadMovies(){
 }
 
 loadMovies()
-
-
-
-
-function criaSwiperSlideImg(src){
-
-  const swiperSlide = document.createElement('div')
-  swiperSlide.setAttribute('class', 'swiper-slide')
-
-  swiperWrapper.appendChild(swiperSlide)
-
-  const img = document.createElement('img')
-  img.setAttribute('src', src)
-
-  swiperSlide.appendChild(img)
-}
-
-
-
 

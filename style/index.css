@@ -360,14 +360,12 @@
   }
 
   .swiper{
-    height: 50vh;
     width: 65vw;
   }
 
   .swiper-wrapper .swiper-slide > img{
     position: relative;
     border-radius: 20px;
-    height: 50vh;
     width: 65vw;
     object-fit: cover;
     border: 1px solid var(--border-color);
@@ -396,6 +394,8 @@
     height: 3.3em;
     width: 80%;
     overflow: hidden;
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
     /* border-left: 1px solid #fff;
     border-right: 1px solid #fff; */
   }
@@ -767,13 +767,13 @@
     text-transform: uppercase;
   }
   .swiper{
-    width: 30vw;
+    width: 40vw;
   }
 
   .swiper-slide img {
     object-fit: cover;
     display: block;
-    width: 35vw;
+    width: 40vw;
     border-radius: 10px;
     border: 2px solid var(--border-color);
   }
