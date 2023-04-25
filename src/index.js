@@ -63,6 +63,11 @@ function atualizaDuracaoFilme(){
   movieDuraction.textContent = gerarDuracaoAleatoria()
 }
 
+function atualizaNotaFilme(nota, index){
+  const notaFilme = document.querySelector('#avaliation-value')
+
+  notaFilme.textContent = nota[index]
+}
 
 //função cria slide do swiper
 function criaSwiperSlideImg(src){
@@ -81,7 +86,7 @@ function criaSwiperSlideImg(src){
 let swiper; // variável global
 
 //Função responsável por iniciar o Swiper
-function loadSwiper(movies, titles, ano, datas, generos){
+function loadSwiper(movies, titles, ano, datas, generos, notas){
   let currentIndex = 0
   let swiperEffect = 'cards'
 
@@ -116,6 +121,7 @@ function loadSwiper(movies, titles, ano, datas, generos){
         atualizaDataLancamento(datas, currentIndex)
         atualizaGenero(generos, currentIndex)
         atualizaDuracaoFilme(movies, currentIndex)
+        atualizaNotaFilme(notas, currentIndex)
       },
     },
   });
@@ -167,12 +173,13 @@ async function loadMovies(){
 
     //cria um novo array percorrendo os genre_ids com o que já tem gravado generosTotal trazendo um array com os nomes
     const generos = movies.map(movie => movie.genre_ids.map(genreId => generosTotal[genreId]).join(', '));
+    //cria um array de notas dos filmes
+    const notas = movies.map(movie => movie.vote_average)
     
-    
-    // console.log(movies[0])
+    console.log(movies[0])
 
     // Iniciando o Swiper e atualizando o background com o primeiro filme
-    loadSwiper(movies, titles, ano, datas, generos)
+    loadSwiper(movies, titles, ano, datas, generos, notas)
     atualizaBackground(movies, 0)
     //Carrega titulo do filme
     atualizaTitulo(titles, 0)
@@ -184,6 +191,8 @@ async function loadMovies(){
     atualizaGenero(generos, 0)
     //Atualiza duração do filme aleatoriamente
     atualizaDuracaoFilme(movies, 0)
+    //Atualiza notas filme
+    atualizaNotaFilme(notas, 0)
     
     
   } catch (error) {
