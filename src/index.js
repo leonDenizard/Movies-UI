@@ -33,7 +33,20 @@ function atualizaTitulo(titulos, index){
   tituloFilme.textContent = titulos[index]
 }
 
+function atualizaAno(ano, index){
+  const anoFormatado = ano[index].slice(0, 4)
+  const anoFilme = document.querySelector('#movie-year')
+  anoFilme.textContent = anoFormatado
+}
+function atualizaDataLancamento(datas, index){
 
+  const [ano, mes, dia] = datas[index].split('-')
+  const dataFormatada = `${dia}/${mes}/${ano}`
+
+  const spanDataLancamento = document.querySelector('#movie-date-launch')
+  spanDataLancamento.textContent = `${dataFormatada} (BR)`
+
+}
 
 //função cria slide do swiper
 function criaSwiperSlideImg(src){
@@ -52,7 +65,7 @@ function criaSwiperSlideImg(src){
 let swiper; // variável global
 
 //Função responsável por iniciar o Swiper
-function loadSwiper(movies, titles){
+function loadSwiper(movies, titles, ano, datas){
   let currentIndex = 0
   let swiperEffect = 'cards'
 
@@ -83,6 +96,8 @@ function loadSwiper(movies, titles){
         currentIndex = this.realIndex
         atualizaBackground(movies, currentIndex)
         atualizaTitulo(titles, currentIndex)
+        atualizaAno(ano, currentIndex)
+        atualizaDataLancamento(datas, currentIndex)
       },
     },
   });
@@ -90,7 +105,7 @@ function loadSwiper(movies, titles){
 
 const key = 'fd298ef799ed7bc469fd73887cdfcc2e'
 const api = `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc`
-
+const apiCertification = `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=pt-BR&page=1`
 async function loadMovies(){
 
   try {
@@ -103,15 +118,25 @@ async function loadMovies(){
       criaSwiperSlideImg(`${linkImagens}${imgPoster}${movie.poster_path}`)
     })
     
+    //criando um novo array de titulos somente com os titulos do objeto
     const titles = movies.map(movie => movie.title)
+    //criando um novo array de ano
+    const ano = movies.map(movie => movie.release_date)
+    //criando um array de datas
+    const datas = movies.map(movie => movie.release_date)
 
     // Iniciando o Swiper e atualizando o background com o primeiro filme
-    loadSwiper(movies, titles)
+    loadSwiper(movies, titles, ano, datas)
     atualizaBackground(movies, 0)
     //Carrega titulo do filme
     atualizaTitulo(titles, 0)
+    //carrega ano filme
+    atualizaAno(ano, 0)
+    //carrega data de lançamento
+    atualizaDataLancamento(datas, 0)
 
-    console.log(movies) 
+    console.log(movies[0])
+    
     
   } catch (error) {
     console.log(error)
