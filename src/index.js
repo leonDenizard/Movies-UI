@@ -26,6 +26,13 @@ function atualizaBackground(movies, index){
   
 }
 
+//função que recebe um array de titulo e muda conforme o swiper tem alteração
+function atualizaTitulo(titulos, index){
+
+  const tituloFilme = document.querySelector('#movie-title')
+  tituloFilme.textContent = titulos[index]
+}
+
 
 
 //função cria slide do swiper
@@ -45,7 +52,7 @@ function criaSwiperSlideImg(src){
 let swiper; // variável global
 
 //Função responsável por iniciar o Swiper
-function loadSwiper(movies){
+function loadSwiper(movies, titles){
   let currentIndex = 0
   let swiperEffect = 'cards'
 
@@ -75,6 +82,7 @@ function loadSwiper(movies){
       slideChange: function(){
         currentIndex = this.realIndex
         atualizaBackground(movies, currentIndex)
+        atualizaTitulo(titles, currentIndex)
       },
     },
   });
@@ -93,11 +101,17 @@ async function loadMovies(){
     // Criando os slides do Swiper
     movies.forEach(movie => {
       criaSwiperSlideImg(`${linkImagens}${imgPoster}${movie.poster_path}`)
-    })  
+    })
+    
+    const titles = movies.map(movie => movie.title)
 
     // Iniciando o Swiper e atualizando o background com o primeiro filme
-    loadSwiper(movies)
+    loadSwiper(movies, titles)
     atualizaBackground(movies, 0)
+    //Carrega titulo do filme
+    atualizaTitulo(titles, 0)
+
+    console.log(movies) 
     
   } catch (error) {
     console.log(error)
