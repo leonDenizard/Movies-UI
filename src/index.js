@@ -51,7 +51,10 @@ function loadSwiper(movies){
 
   if(window.innerWidth > 468 && window.innerWidth <= 768){
     swiperEffect = 'coverflow'
+  }else if(window.innerWidth > 768){
+    swiperEffect = 'coverflow'
   }
+  
   swiper = new Swiper('.swiper', {
     effect: swiperEffect,
     cardsEffect:{
@@ -94,12 +97,7 @@ async function loadMovies(){
 
     // Iniciando o Swiper e atualizando o background com o primeiro filme
     loadSwiper(movies)
-    
-   
     atualizaBackground(movies, 0)
-   
-    
-
     
   } catch (error) {
     console.log(error)
