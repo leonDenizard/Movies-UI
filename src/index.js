@@ -45,18 +45,18 @@ function atualizaDataLancamento(datas, index){
   const dataFormatada = `${dia}/${mes}/${ano}`
 
   const spanDataLancamento = document.querySelector('#movie-date-launch')
-  spanDataLancamento.textContent = `Data de lançamento: ${dataFormatada} (BR)`
+  spanDataLancamento.textContent = ` ${dataFormatada} (BR)`
 
 }
 function atualizaGenero(generos, index) {
   const movieGeneros = document.querySelector('#movie-genres')
-  movieGeneros.textContent = `Genero: ${generos[index]}`
+  movieGeneros.textContent = ` ${generos[index]}`
 }
 function gerarDuracaoAleatoria() {
   const minutosTotais = Math.floor(Math.random() * (175 - 110 + 1)) + 110; // gera um número aleatório entre 110 e 175
   const horas = Math.floor(minutosTotais / 60);
   const minutos = minutosTotais % 60;
-  return `${horas.toString().padStart(2, '0')}h${minutos.toString().padStart(2, '0')}m`;
+  return ` ${horas.toString().padStart(2, '0')}h${minutos.toString().padStart(2, '0')}m`;
 }
 
 function atualizaDuracaoFilme(){
@@ -99,9 +99,7 @@ function atualizaDetalheAtores(atoresId){
       nomeAtor.textContent = nomeAtores.join(',')
 
       
-      while(containerProfile.firstChild){
-        containerProfile.removeChild(containerProfile.firstChild)
-      }
+      containerProfile.innerHTML = ''
       
       cast.forEach(ator => {
         criaImgAtor(`${linkImagens}${imgProfileSize}${ator.profile_path}`)
