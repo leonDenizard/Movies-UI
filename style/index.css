@@ -927,14 +927,14 @@
   }
 
   .swiper{
-    width: 12rem;
+    width: 11rem;
     cursor: grab;
   }
 
   .swiper-slide img {
     object-fit: cover;
     display: block;
-    width: 12rem;
+    width: 11rem;
     border-radius: 10px;
     border: 2px solid var(--border-color);
     overflow: hidden;
@@ -958,8 +958,8 @@
     width: 90%;
   }
   .container-info .wrapper-title h2#movie-title{
-    font-size: 1.5em;
-    text-align: center;
+    font-size: 1.6em;
+    /* text-align: center; */
     background-image: linear-gradient(to right, #d644ff, #ff0095, #ff651a, #e6b800, #5eeb12);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1036,13 +1036,12 @@
     border-radius: 50%;
     cursor: pointer;
     border: 2px solid var(--border-color);
-    transition: all ease 0.5s;
+    transition: all 0.2s ease-in-out;
   }
   .container-cast .profile img:hover{
     height: auto;
     width: 100px;
     border-radius: 10px;
-    transition: all ease 0.5s;
   }
 
 
