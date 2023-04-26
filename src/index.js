@@ -15,6 +15,7 @@ const linkImagens = 'https://image.tmdb.org/t/p/'
 const img1280 = 'w1280'
 const imgPoster = 'w500'
 const imgOriginal = 'original'
+const imgProfileSize = 'w185'
 
 // Função responsavel por atualizaBackground do fundo da pagina
 function atualizaBackground(movies, index){
@@ -75,6 +76,57 @@ function atualizaSinopse(snopses, index){
   sinopse.textContent = snopses[index]
 }
 
+function atualizaDetalheAtores(atoresId){
+
+  const containerProfile = document.querySelector('.profile')
+  const nomeAtor = document.querySelector('#name-actor')
+
+  async function loadNames(atoresId){
+
+    try {
+
+      const api = `https://api.themoviedb.org/3/movie/${atoresId}/credits?api_key=${key}&language=pt-BR`
+      const response = await fetch(api)
+      const data = await response.json()
+
+      const cast = data.cast.slice(0, 4)
+
+      // console.log(cast)
+      const nomeAtores = cast.map(ator => ator.name)
+      // console.log(nomeAtores)
+
+      
+      nomeAtor.textContent = nomeAtores.join(',')
+
+      
+      while(containerProfile.firstChild){
+        containerProfile.removeChild(containerProfile.firstChild)
+      }
+      
+      cast.forEach(ator => {
+        criaImgAtor(`${linkImagens}${imgProfileSize}${ator.profile_path}`)
+      })
+    
+      
+
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
+  loadNames(atoresId)
+
+}
+
+function criaImgAtor(src){
+  const containerProfile = document.querySelector('.profile')
+  const imgProfile = document.createElement('img')
+  imgProfile.src = src
+   
+  containerProfile.appendChild(imgProfile)
+
+}
+
 //função cria slide do swiper
 function criaSwiperSlideImg(src){
 
@@ -92,7 +144,7 @@ function criaSwiperSlideImg(src){
 let swiper; // variável global
 
 //Função responsável por iniciar o Swiper
-function loadSwiper(movies, titles, ano, datas, generos, notas, sinopses){
+function loadSwiper(movies, titles, ano, datas, generos, notas, sinopses, actoresId){
   let currentIndex = 0
   let swiperEffect = 'cards'
 
@@ -111,7 +163,7 @@ function loadSwiper(movies, titles, ano, datas, generos, notas, sinopses){
       loop: true
     },
     coverflowEffect: {
-      rotate: 20,
+      rotate: 0,
       stretch: 0,
       depth: 200,
       modifier: 1,
@@ -129,6 +181,7 @@ function loadSwiper(movies, titles, ano, datas, generos, notas, sinopses){
         atualizaDuracaoFilme(movies, currentIndex)
         atualizaNotaFilme(notas, currentIndex)
         atualizaSinopse(sinopses, currentIndex)
+        atualizaDetalheAtores(actoresId[currentIndex], currentIndex)
       },
     },
   });
@@ -178,16 +231,19 @@ async function loadMovies(){
     //criando um array de datas
     const datas = movies.map(movie => movie.release_date)
 
-    //cria um novo array percorrendo os genre_ids com o que já tem gravado generosTotal trazendo um array com os nomes
+    //criando um novo array percorrendo os genre_ids com o que já tem gravado generosTotal trazendo um array com os nomes
     const generos = movies.map(movie => movie.genre_ids.map(genreId => generosTotal[genreId]).join(', '));
-    //cria um array de notas dos filmes
+    //criando um array de notas dos filmes
     const notas = movies.map(movie => movie.vote_average)
     const sinopses = movies.map(movie => movie.overview)
+    //criando um novo array para armazenar od ids dos filmes
+    const idsFilme = movies.map(movie => movie.id)
     
-    console.log(movies[0])
+    
+    // console.log(idsFilme)
 
     // Iniciando o Swiper e atualizando o background com o primeiro filme
-    loadSwiper(movies, titles, ano, datas, generos, notas, sinopses)
+    loadSwiper(movies, titles, ano, datas, generos, notas, sinopses, idsFilme)
     atualizaBackground(movies, 0)
     //Carrega titulo do filme
     atualizaTitulo(titles, 0)
@@ -202,6 +258,9 @@ async function loadMovies(){
     //Atualiza notas filme
     atualizaNotaFilme(notas, 0)
     atualizaSinopse(sinopses, 0)
+    atualizaDetalheAtores(idsFilme, 0)
+
+    
     
     
   } catch (error) {
@@ -212,3 +271,6 @@ async function loadMovies(){
 
 loadMovies()
 
+
+// https://api.themoviedb.org/3/movie/640146/credits
+// https://api.themoviedb.org/3/movie/640146/credits?api_key=fd298ef799ed7bc469fd73887cdfcc2e&language=pt-BR
