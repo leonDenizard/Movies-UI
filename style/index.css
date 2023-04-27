@@ -1100,6 +1100,16 @@
     flex-direction: column;
     justify-content: space-evenly;
   }
+  .container-navigation ul > li.active::before{
+    content: '';
+    width: 8px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: #fff;
+    filter: drop-shadow(0 0 4rem #fff);
+    position: absolute;
+    left: 10px;
+  }
   .container-navigation ul > li a{
     display: flex;
     align-items: center;

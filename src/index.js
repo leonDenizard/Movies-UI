@@ -282,3 +282,18 @@ loadMovies()
 
 // https://api.themoviedb.org/3/movie/640146/credits
 // https://api.themoviedb.org/3/movie/640146/credits?api_key=fd298ef799ed7bc469fd73887cdfcc2e&language=pt-BR
+
+const listLinks = document.querySelectorAll('.list-link > li');
+
+listLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    // Remove a classe "active" de todos os links
+    listLinks.forEach(efeito => efeito.classList.remove('active'));
+
+    // Adiciona a classe "active" apenas no link clicado
+    link.classList.add('active');
+  });
+});
+
+// Define o primeiro link como ativo ao carregar a página
+listLinks[0].classList.add('active');
