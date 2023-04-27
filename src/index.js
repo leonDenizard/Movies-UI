@@ -66,9 +66,16 @@ function atualizaDuracaoFilme(){
 
 function atualizaNotaFilme(nota, index){
   const notaFilme = document.querySelector('#avaliation-value')
+  const notaMaxima = 10 // Define a nota máxima
 
   notaFilme.textContent = nota[index]
+
+  const containerAvaliation = document.querySelector('.container-value')
+  const proporcaoNota = nota[index] / notaMaxima // Calcula a proporção da nota em relação à nota máxima
+  containerAvaliation.style.backgroundImage = `conic-gradient(#d644ff ${proporcaoNota * 25}%, #ff0095 ${proporcaoNota * 50}%, #ff651a ${proporcaoNota * 75}%, #e6b800 ${proporcaoNota * 99}%, transparent ${proporcaoNota * 100}%)`
+
 }
+
 
 function atualizaSinopse(snopses, index){
   const sinopse = document.querySelector('.movie-sinopse > p')
@@ -96,13 +103,16 @@ function atualizaDetalheAtores(atoresId){
       // console.log(nomeAtores)
 
       
-      nomeAtor.textContent = nomeAtores.join(',')
+      nomeAtor.textContent = nomeAtores.join(', ')
 
       
       containerProfile.innerHTML = ''
       
       cast.forEach(ator => {
-        criaImgAtor(`${linkImagens}${imgProfileSize}${ator.profile_path}`)
+        if(ator.profile_path){
+          criaImgAtor(`${linkImagens}${imgProfileSize}${ator.profile_path}`)
+        }
+        
       })
     
       

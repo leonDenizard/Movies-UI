@@ -927,7 +927,7 @@
   }
 
   .swiper{
-    width: 11rem;
+    width: 11rem; 
     cursor: grab;
   }
 
@@ -947,6 +947,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
   }
   span, h2, p{
     font-family: 'Poppins';
@@ -960,11 +961,18 @@
   .container-info .wrapper-title h2#movie-title{
     font-size: 1.6em;
     /* text-align: center; */
-    background-image: linear-gradient(to right, #d644ff, #ff0095, #ff651a, #e6b800, #5eeb12);
+    background-image: linear-gradient(to right, #d644ff, #ff0095, #ff651a, #e6b800);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     opacity: 1;
     font-weight: 600;
+  }
+  #movie-duraction{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0 5px;
+    border-radius: 5px;
+    margin-left: 5px;
   }
   .description{
     font-size: 1em;
@@ -981,16 +989,28 @@
     gap: 1em;
   }
   .movie-avaliation .container-value{
-    width: 2rem;
-    height: 2rem;
+    position: relative;
+    width: 3rem;
+    height: 3rem;
     display: grid;
     place-items: center;
+    justify-content: center;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-image: linear-gradient(to bottom, #d644ff, #ff0095, #ff651a, #e6b800);
+  }
+  .movie-avaliation .container-value::before{
+    content: '';
+    width: 2.2rem;
+    height: 2.2rem;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 1);
+    border-radius: 50%;
+
   }
   .movie-avaliation .container-value #avaliation-value{
     color: #FFF;
     font-size: 0.9em;
+    z-index: 3;
   }
   #sinopse{
     position: relative;
@@ -1028,8 +1048,11 @@
   .container-cast .profile{
     position: relative;
     display: flex;
+    justify-content: space-between;
   }
   .container-cast .profile img{
+    position: relative;
+    bottom: 40px;
     width: 45px;
     height: 45px;
     object-fit: cover;
@@ -1039,10 +1062,17 @@
     transition: all 0.2s ease-in-out;
   }
   .container-cast .profile img:hover{
-    height: auto;
-    width: 100px;
-    border-radius: 10px;
+    transform: scale(2.5);
+    border-radius: 5px;
+    border: none;
+    z-index: 2;
+    
   }
+  .container-cast .description{
+    display: inline-block;
+    margin-right: 5px;
+  }
+  
 
 
   .container-navigation{
