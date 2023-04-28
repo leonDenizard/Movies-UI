@@ -177,7 +177,7 @@ function loadSwiper(movies, titles, ano, datas, generos, notas, sinopses, actore
       modifier: 1,
       slideShadows: true,
     },
-    loop: false,
+    loop: true,
     on:{
       slideChange: function(){
         currentIndex = this.realIndex
@@ -196,7 +196,7 @@ function loadSwiper(movies, titles, ano, datas, generos, notas, sinopses, actore
 }
 
 const key = 'fd298ef799ed7bc469fd73887cdfcc2e'
-const api = `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc`
+const api = `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc&page=1`
 
 const generosTotal = {
   28: 'Ação',
@@ -227,6 +227,7 @@ async function loadMovies(){
     const data = await response.json()
     const movies = data.results
 
+    
     // Criando os slides do Swiper
     movies.forEach(movie => {
       criaSwiperSlideImg(`${linkImagens}${imgPoster}${movie.poster_path}`)
@@ -268,7 +269,22 @@ async function loadMovies(){
     atualizaSinopse(sinopses, 0)
     atualizaDetalheAtores(idsFilme, 0)
 
-    
+    const containerData = document.querySelector('.container-data')
+
+    if(window.innerWidth <= 768){
+      const imgCarrosel = document.querySelectorAll('.swiper-slide > img')
+      
+      imgCarrosel.forEach(img => {
+        img.addEventListener('click', (event)=>{
+          event.stopPropagation()
+          containerData.style.display = 'block'
+        })
+      })
+
+      document.body.addEventListener('click', ()=>{
+        containerData.style.display = 'none'
+      })
+    }
     
     loadDiv.style.display = 'none';
   } catch (error) {
@@ -298,3 +314,5 @@ listLinks.forEach(link => {
 
 // Define o primeiro link como ativo ao carregar a página
 listLinks[0].classList.add('active');
+
+
