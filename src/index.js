@@ -177,7 +177,7 @@ function loadSwiper(movies, titles, ano, datas, generos, notas, sinopses, actore
       modifier: 1,
       slideShadows: true,
     },
-    loop: true,
+    loop: false,
     on:{
       slideChange: function(){
         currentIndex = this.realIndex
@@ -270,15 +270,16 @@ async function loadMovies(){
 
     
     
-    
+    loadDiv.style.display = 'none';
   } catch (error) {
     console.log(error)
   }
   
 }
 
-loadMovies()
 
+const loadDiv = document.getElementById('load');
+window.addEventListener('load', loadMovies);
 
 // https://api.themoviedb.org/3/movie/640146/credits
 // https://api.themoviedb.org/3/movie/640146/credits?api_key=fd298ef799ed7bc469fd73887cdfcc2e&language=pt-BR

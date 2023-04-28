@@ -870,7 +870,7 @@
 }
 
 
-@media (min-width: 769px ) and (max-width: 3440px) {
+@media (min-width: 769px ){
   body{
     position: relative;
     min-height: 100vh;
@@ -1000,8 +1000,8 @@
   }
   .movie-avaliation .container-value::before{
     content: '';
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2rem;
+    height: 2rem;
     position: absolute;
     background-color: rgba(0, 0, 0, 1);
     border-radius: 50%;
@@ -1142,4 +1142,51 @@
     font-size: 1.2rem;
     color: rgba(255, 255, 255, 0.8);
   }
+  #load{
+    top: 0;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: #131212;
+  }
+  
+}
+
+@media (min-width: 1536px) {
+  /* body{
+    background-color: #d644ff;
+  } */
+  .swiper{
+    width: 14rem; 
+    cursor: grab;
+  }
+  
+  .swiper-slide img {
+    object-fit: cover;
+    display: block;
+    width: 14rem;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+  }
+  .swiper-button-next{
+    position: absolute;
+    left: 250px;
+  }
+  .container-info .wrapper-title h2#movie-title{
+    font-size: 2.6em;
+    /* text-align: center; */
+    background-image: linear-gradient(to right, #d644ff, #ff0095, #ff651a, #e6b800);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 1;
+    font-weight: 600;
+  }
+  .container-data{
+    transition: all 1s ease;
+  }
+  .movie-sinopse{
+    height: 100%;
+  }
+  
 }
