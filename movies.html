@@ -6,7 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Movies UI</title>
         <link rel="stylesheet" href="./style/swiper.css">
+        <link rel="stylesheet" href="./style/movies.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
+        <script src="https://kit.fontawesome.com/76792f40a3.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class="container-icon">
@@ -19,25 +21,25 @@
 
             <h3>Filtra por:</h3>
             <ul>
-                <li><a href="">Ação</a></li>
-                <li><a href="">Aventura</a></li>
-                <li><a href="">Animação</a></li>
-                <li><a href="">Comédia</a></li>
-                <li><a href="">crime</a></li>
-                <li><a href="">Documentário</a></li>
-                <li><a href="">Drama</a></li>
-                <li><a href="">Familia</a></li>
-                <li><a href="">Fantasia</a></li>
-                <li><a href="">História</a></li>
-                <li><a href="">Terror</a></li>
-                <li><a href="">Música</a></li>
-                <li><a href="">Mistério</a></li>
-                <li><a href="">Romance</a></li>
-                <li><a href="">Ficção científica</a></li>
-                <li><a href="">Cinema TV</a></li>
-                <li><a href="">Thriller</a></li>
-                <li><a href="">Guerra</a></li>
-                <li><a href="">Faroeste</a></li>
+                <li><a href="#">Ação</a></li>
+                <li><a href="#">Aventura</a></li>
+                <li><a href="#">Animação</a></li>
+                <li><a href="#">Comédia</a></li>
+                <li><a href="#">crime</a></li>
+                <li><a href="#">Documentário</a></li>
+                <li><a href="#">Drama</a></li>
+                <li><a href="#">Familia</a></li>
+                <li><a href="#">Fantasia</a></li>
+                <li><a href="#">História</a></li>
+                <li><a href="#">Terror</a></li>
+                <li><a href="#">Música</a></li>
+                <li><a href="#">Mistério</a></li>
+                <li><a href="#">Romance</a></li>
+                <li><a href="#">Ficção científica</a></li>
+                <li><a href="#">Cinema TV</a></li>
+                <li><a href="#">Thriller</a></li>
+                <li><a href="#">Guerra</a></li>
+                <li><a href="#">Faroeste</a></li>
             </ul>
         </header>
         <nav class="container-navigation">
@@ -85,7 +87,9 @@
             <section class="wrapper-movie-main">
                 <img src="" alt="" srcset="">
                 <div class="wrapper-search">
+                    <i class="ph ph-magnifying-glass"></i>
                     <input type="search" name="search" id="search">
+
                 </div>
                 <div class="wrapper-data">
                     <h1 id="title">Titulo do filme</h1>
@@ -99,10 +103,29 @@
             </section>
             
             <section class="wrapper-movie-result">
-                <!-- Ajustar swipper -->
+                <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" slides-per-view="10"
+                    space-between="30" centered-slides="true">
+                    <swiper-slide>
+                        <div>
+                            <img src="" alt="">
+                            <i class="fa-sharp fa-solid fa-heart" style="color: rgba(0,0,0,0.5);"></i>
+                            <h3>Titulo filme</h3>
+
+                        </div>
+                    </swiper-slide>
+                    <swiper-slide>Slide 2</swiper-slide>
+                    <swiper-slide>Slide 3</swiper-slide>
+                    <swiper-slide>Slide 4</swiper-slide>
+                    <swiper-slide>Slide 5</swiper-slide>
+                    <swiper-slide>Slide 6</swiper-slide>    
+                    <swiper-slide>Slide 7</swiper-slide>
+                    <swiper-slide>Slide 8</swiper-slide>
+                    <swiper-slide>Slide 9</swiper-slide>
+                </swiper-container>
             </section>
 
             
           </main>
+          <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
     </body>
 </html>

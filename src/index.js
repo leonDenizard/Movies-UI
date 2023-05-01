@@ -196,7 +196,7 @@ function loadSwiper(movies, titles, ano, datas, generos, notas, sinopses, actore
 }
 
 const key = 'fd298ef799ed7bc469fd73887cdfcc2e'
-const api = `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc&page=3`
+const api = `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc&page=1`
 
 const generosTotal = {
   28: 'Ação',
