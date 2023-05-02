@@ -89,22 +89,21 @@
 
         <main class="container-movie">
             <section class="wrapper-movie-main">
-                <img src="./assets/guardians.jpg" alt="" srcset="">
-                <div class="wrapper-search">
-                    <i class="ph ph-magnifying-glass"></i>
-                    <input type="search" name="search" id="search">
+                <img src="./assets/guardians.jpg" alt="" srcset="">             
                     <div class="wrapper-data">
                         <h1 id="title">Titulo do filme</h1>
                         <div class="avaliation">
-                            <div>6.5</div><span>imdb</span>
+                            <div class="avaliation-data">6.5 IMDB</div>
+                            <div class="play">
+                                <span><i class="ph ph-play"></i>Assistir</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="play">
-                        <span><i class="ph ph-play"></i>Assistir</span>
-                    </div>
-                </div>
-                
+                    </div>               
             </section>
+            <div class="wrapper-search">
+                <input type="text" name="search" id="search" autocomplete="off" placeholder="Pesquisar Filme">
+                <i class="ph ph-magnifying-glass"></i>
+            </div>
             
             <section class="wrapper-movie-result">
                 <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" slides-per-view="10"
