@@ -18,3 +18,16 @@ listLinks.forEach(link => {
     })
 })
 listLinks[0].classList.add('active')
+
+function loadSwiper(){
+    swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        centeredSlides: false,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+}
+loadSwiper()

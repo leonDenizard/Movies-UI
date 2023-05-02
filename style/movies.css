@@ -93,7 +93,8 @@
         width: 0%;
       }
       100% {
-        width: 35px;
+        width: 25px;
+        right: 20px;
       }
     }
     
@@ -113,7 +114,8 @@
         width: 0px;
       }
       100% {
-        width: 20px;
+        width: 12px;
+        right: 26px;
       }
     }
     
@@ -153,7 +155,8 @@
         width: 0px;
       }
       100% {
-        width: 30px;
+        width: 36px;
+        right: 15px;
       }
     }
     
@@ -416,12 +419,12 @@
       align-items: center;
     }
     .wrapper-movie-result swiper-container{
-      /* background-color: #320e3b; */
+      /* background-color: #fff; */
       width: 100%;
       max-height: 100%;
     }
     .wrapper-movie-result swiper-container swiper-slide{
-      /* background-color: #e6b800; */
+      background-color: #e6b800;
       width: 200px !important;
       height: 300px;
     }
