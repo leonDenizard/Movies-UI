@@ -38,12 +38,13 @@ function loadSwiper() {
 loadSwiper();
 
 function criaSwiperSlideImg(src, titulo) {
-    //Cria swiper-slide
-    const swiperSlide = document.createElement('swiper-slide')
-    
-    //cria a div com a classe wrapper-slide
-    const divWrapperSlide = document.createElement('div')
-    divWrapperSlide.classList.add('wrapper-slide')
+    //Cria a div swiper-slide e adiciona a classe swipper-slide
+    const swiperSlide = document.createElement('div')
+    swiperSlide.classList.add('swiper-slide')
+
+    //cria a div com a classe content-slide
+    const divContentSlide = document.createElement('div')
+    divContentSlide.classList.add('content-slide')
 
     //cria img e atribui o src do parametro
     const img = document.createElement('img')
@@ -59,18 +60,19 @@ function criaSwiperSlideImg(src, titulo) {
     const tituloH3 = document.createElement('h3')
     tituloH3.textContent = titulo
 
-    //Adiciona swiper-slide dentro do swiper-container
-    swiper.appendChild(swiperSlide)
-    //Adiciona div wrapper-slide dentro do elemento swiper-slide
-    swiperSlide.appendChild(divWrapperSlide)
-    //Adiciona img dentro da divWrapperSlide
-    divWrapperSlide.appendChild(img)
-    //Adiciona o icone dentro da divWrapperSlide
-    divWrapperSlide.appendChild(i)
-    //Adiciona titulo no divWrapperSlide
-    divWrapperSlide.appendChild(tituloH3)
+    //Seleciona o ponto onde será incluído o swiper-slide
+    const swiperWrapper = document.querySelector('.swiper-wrapper')
+    swiperWrapper.appendChild(swiperSlide)
+
+    //Adiciona a div content-slide dentro do swiper-slide
+    swiperSlide.appendChild(divContentSlide)
+    //Adiciona o restante dos elementos dentro da div content-slide
+    divContentSlide.appendChild(img)
+    divContentSlide.appendChild(i)
+    divContentSlide.appendChild(tituloH3)
 
     console.log('funciono')
 }
+
 
 
