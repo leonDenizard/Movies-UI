@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="./style/movies.css">
         <script src="https://unpkg.com/@phosphor-icons/web"></script>
         <script src="https://kit.fontawesome.com/76792f40a3.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     </head>
     <body>
         <div class="container-icon">
@@ -106,23 +107,43 @@
             </div>
             
             <section class="wrapper-movie-result">
-                <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" slides-per-view="2"
-                    space-between="20" centered-slides="true">
-                    <swiper-slide>
-                        <div class="wrapper-slide">
-                            <img src="./assets/lightyear.jpg" alt="">
-                            <i class="fa-sharp fa-solid fa-heart"></i>
-                            <h3>Titulo filme</h3>
-
-                        </div>
-                    </swiper-slide>
+              
+                <div class="swiper">
                     
+                    <div class="swiper-wrapper">
+                    
+                        <div class="swiper-slide">
+                            <div class="content-slide">
+                                <img src="./assets/lightyear.jpg" alt="">
+                                <i class="fa-sharp fa-solid fa-heart"></i>
+                                <h3>Titulo filme</h3>
+                            </div>
+                        </div>
 
-                </swiper-container>
+                        <div class="swiper-slide">
+                            <div class="content-slide">
+                                <img src="./assets/lightyear.jpg" alt="">
+                                <i class="fa-sharp fa-solid fa-heart"></i>
+                                <h3>Titulo filme</h3>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="content-slide">
+                                <img src="./assets/lightyear.jpg" alt="">
+                                <i class="fa-sharp fa-solid fa-heart"></i>
+                                <h3>Titulo filme</h3>
+                            </div>
+                        </div>
+                        
+                    
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
             </section> 
         </main>
         
+        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
         <script src="./src/movies.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
     </body>
 </html>

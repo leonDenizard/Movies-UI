@@ -1,6 +1,6 @@
 const btnMenu = document.querySelector(".container-icon");
 const headerMenu = document.querySelector(".container-menu");
-const swiper = document.querySelector('.mySwiper')
+
 
 function toggleMenu() {
   btnMenu.classList.toggle("active");
@@ -19,18 +19,23 @@ listLinks.forEach((link) => {
 });
 listLinks[0].classList.add("active");
 
+
+
+
 function loadSwiper() {
-  var swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1,
+  const swiper = new Swiper(".swiper", {
+    slidesPerView: 2,
     spaceBetween: 30,
-    centeredSlides: false,
+    centeredSlides: true,
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
     },
   });
+
+  console.log('swiper carregado')
 }
-// loadSwiper();
+loadSwiper();
 
 function criaSwiperSlideImg(src, titulo) {
     //Cria swiper-slide
@@ -68,4 +73,4 @@ function criaSwiperSlideImg(src, titulo) {
     console.log('funciono')
 }
 
-criaSwiperSlideImg('./assets/guardians.jpg', 'Guardioes')
+
