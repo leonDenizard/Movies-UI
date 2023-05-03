@@ -21,9 +21,9 @@ listLinks[0].classList.add("active");
 
 
 
-
+let swiper = document.querySelector('.swiper')
 function loadSwiper() {
-  const swiper = new Swiper(".swiper", {
+  swiper = new Swiper(".swiper", {
     slidesPerView: 2,
     spaceBetween: 30,
     centeredSlides: true,
@@ -31,11 +31,11 @@ function loadSwiper() {
       el: ".swiper-pagination",
       clickable: true,
     },
-  });
-
-  console.log('swiper carregado')
+    
+  })
 }
 loadSwiper();
+
 
 function criaSwiperSlideImg(src, titulo) {
     //Cria a div swiper-slide e adiciona a classe swipper-slide
@@ -70,9 +70,61 @@ function criaSwiperSlideImg(src, titulo) {
     divContentSlide.appendChild(img)
     divContentSlide.appendChild(i)
     divContentSlide.appendChild(tituloH3)
-
-    console.log('funciono')
 }
 
+function clearSwiper(){
+  const swiperWrapper = document.querySelector('.swiper-wrapper')
+  swiperWrapper.innerHTML = ''
+}
 
+const key = 'fd298ef799ed7bc469fd73887cdfcc2e'
 
+function getGenresID(link){
+  return link.getAttribute('id')
+}
+
+function buildApiUrl(genreID){
+  return `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc&with_genres=${genreID}`
+}
+
+async function loadMovies(apiUrl){
+  try {
+
+    const response = await fetch(apiUrl)
+    const data = await response.json()
+
+    const movies = data.results;
+    
+    clearSwiper()
+
+    movies.forEach(movie =>{
+      criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+    })
+
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+function loadMoviesGenres(){
+  const linkGenres = document.querySelectorAll('header ul li > a')
+
+  linkGenres.forEach( link => {
+    link.addEventListener('click', async event =>{
+      
+      const genreID = getGenresID(link)
+      const apiUrl = buildApiUrl(genreID)
+
+      await loadMovies(apiUrl)
+      swiper.slideTo(0);
+
+      
+    })
+
+    
+  })
+  linkGenres[0].click();
+}
+
+loadMoviesGenres()
