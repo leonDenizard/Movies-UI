@@ -21,11 +21,12 @@ listLinks[0].classList.add("active");
 
 
 
+
 let swiper = document.querySelector('.swiper')
 function loadSwiper() {
   swiper = new Swiper(".swiper", {
     slidesPerView: 2,
-    spaceBetween: 30,
+    spaceBetween: 20,
     centeredSlides: true,
     pagination: {
       el: ".swiper-pagination",
@@ -101,6 +102,7 @@ async function loadMovies(apiUrl){
       criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
     })
 
+    changeColorFavorite()
     
   } catch (error) {
     console.log(error)
@@ -128,3 +130,13 @@ function loadMoviesGenres(){
 }
 
 loadMoviesGenres()
+
+function changeColorFavorite(){
+  const icone = document.querySelectorAll('.swiper-slide .content-slide > i')
+  icone.forEach(i =>{
+    i.addEventListener('click', ()=>{
+      i.classList.toggle('active')
+    })
+  })
+}
+
