@@ -98,12 +98,18 @@ async function loadMovies(apiUrl){
     
     clearSwiper()
 
-    movies.forEach(movie =>{
+    movies.forEach((movie, index) =>{
       criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+
+      const slide = document.querySelectorAll('.swiper-slide')[index]
+      slide.addEventListener('click', ()=>{
+        changeBackground(movie)
+      })
     })
 
+    changeBackground(movies[0])
     changeColorFavorite()
-    
+
   } catch (error) {
     console.log(error)
   }
@@ -121,7 +127,8 @@ function loadMoviesGenres(){
       await loadMovies(apiUrl)
       swiper.slideTo(0);
 
-      
+      headerMenu.classList.remove('active')
+      btnMenu.classList.remove('active')
     })
 
     
@@ -140,3 +147,13 @@ function changeColorFavorite(){
   })
 }
 
+
+function changeBackground(movie){
+
+  const imgBackground = document.querySelector('#background')
+  const imdbDiv = document.querySelector('.avaliation-data')
+  
+  imgBackground.src = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
+  imdbDiv.textContent = `${movie.vote_average} IMDB`
+
+}
