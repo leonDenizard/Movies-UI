@@ -162,7 +162,7 @@ function changeBackground(movie){
 function buildQueryApi(query){
 
   const queryFormatade = query.toLowerCase().replace(/\s+/g, '+')
-  console.log(queryFormatade)
+
   
   return `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${queryFormatade}&language=pt-BR`
 }
@@ -172,7 +172,29 @@ async function searchMovieApi(api){
     const response = await fetch(api)
     const data = await response.json()
 
-    console.log(data.results)
+    const movies = data.results
+
+    clearSwiper()
+
+    movies.forEach((movie, index) =>{
+
+      if(movie.backdrop_path){
+        criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+
+        const slide = document.querySelectorAll('.swiper-slide')[index]
+        slide.addEventListener('click', ()=>{
+          changeBackground(movie)
+        })
+      
+      }
+      
+    })
+
+    changeBackground(movies[0])
+    changeColorFavorite()
+    
+
+    
   } catch (error) {
     console.log(error)
   }
@@ -188,6 +210,8 @@ function searchInput(){
     const api = buildQueryApi(query)
 
     searchMovieApi(api)
+    swiper.slideTo(0)
+    inputSearch.blur()
     
   })
   
