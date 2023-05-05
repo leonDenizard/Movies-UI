@@ -101,6 +101,7 @@ async function loadMovies(apiUrl){
     movies.forEach((movie, index) =>{
       criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
 
+      //Criado vinculo entre o slide criado com o index do filme na api para poder carregar os dados pelo click
       const slide = document.querySelectorAll('.swiper-slide')[index]
       slide.addEventListener('click', ()=>{
         changeBackground(movie)
@@ -157,3 +158,40 @@ function changeBackground(movie){
   imdbDiv.textContent = `${movie.vote_average} IMDB`
 
 }
+
+function buildQueryApi(query){
+
+  const queryFormatade = query.toLowerCase().replace(/\s+/g, '+')
+  console.log(queryFormatade)
+  
+  return `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${queryFormatade}&language=pt-BR`
+}
+
+async function searchMovieApi(api){
+  try {
+    const response = await fetch(api)
+    const data = await response.json()
+
+    console.log(data.results)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+function searchInput(){
+  const inputSearch = document.querySelector('#search')
+  const form = document.querySelector('#form-search')
+  
+  form.addEventListener('submit', (event)=>{
+    event.preventDefault()
+    const query = inputSearch.value
+    const api = buildQueryApi(query)
+
+    searchMovieApi(api)
+    
+  })
+  
+
+}
+
+searchInput()
