@@ -155,7 +155,7 @@ function changeBackground(movie){
   const imdbDiv = document.querySelector('.avaliation-data')
   
   imgBackground.src = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
-  imdbDiv.textContent = `${movie.vote_average} IMDB`
+  imdbDiv.textContent = `${movie.vote_average.toFixed(1)} IMDB`
 
 }
 
@@ -218,7 +218,7 @@ function searchInput(){
     searchMovieApi(api)
     swiper.slideTo(0);
     inputSearch.blur()
-    
+
     inputSearch.value = ""
 
     
