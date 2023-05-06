@@ -217,7 +217,9 @@ function searchInput(){
 
     searchMovieApi(api)
     swiper.slideTo(0);
-    inputSearch.blur();
+    inputSearch.blur()
+    
+    inputSearch.value = ""
 
     
   })
