@@ -176,23 +176,29 @@ async function searchMovieApi(api){
 
     clearSwiper()
 
+    const slides = []
     movies.forEach((movie, index) =>{
 
       if(movie.backdrop_path){
         criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
 
         const slide = document.querySelectorAll('.swiper-slide')[index]
-        slide.addEventListener('click', ()=>{
-          changeBackground(movie)
-        })
-      
+        slides.push(slide)
       }
       
     })
 
     changeBackground(movies[0])
     changeColorFavorite()
-    
+
+    slides.forEach((slide, index)=>{
+      if(slide){
+        slide.addEventListener('click', ()=>{
+          changeBackground(movies[index])
+        })
+      }
+      
+    })
 
     
   } catch (error) {
@@ -210,8 +216,9 @@ function searchInput(){
     const api = buildQueryApi(query)
 
     searchMovieApi(api)
-    swiper.slideTo(0)
-    inputSearch.blur()
+    swiper.slideTo(0);
+    inputSearch.blur();
+
     
   })
   
