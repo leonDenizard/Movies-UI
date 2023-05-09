@@ -83,9 +83,10 @@ const key = 'fd298ef799ed7bc469fd73887cdfcc2e'
 function getGenresID(link){
   return link.getAttribute('id')
 }
+const page = 1;
 
 function buildApiUrl(genreID){
-  return `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc&with_genres=${genreID}`
+  return `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc&with_genres=${genreID}&page=${page}`
 }
 
 async function loadMovies(apiUrl){
@@ -99,6 +100,7 @@ async function loadMovies(apiUrl){
     clearSwiper()
 
     movies.forEach((movie, index) =>{
+
       criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
 
       //Criado vinculo entre o slide criado com o index do filme na api para poder carregar os dados pelo click
