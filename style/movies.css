@@ -1006,9 +1006,50 @@ header.container-menu.active{
   background-image: linear-gradient(to right, #d644ff, #ff0095, #ff651a, #e6b800) !important;
 }
 
+}
 
+@media (min-width: 768px) {
+  html, body{
+    overflow: visible;
+    min-height: 110vh;
+  }
+  .container-movie .wrapper-movie-result {
+    position: relative;
+    top: 1rem;
+    width: 100%;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
+  .wrapper-movie-result .swiper .swiper-wrapper .swiper-slide {
+    /* background-color: #d644ff; */
+    height: 300px;
+    width: 200px !important;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .swiper-slide .content-slide i{
+    position: absolute;
+    top: 0.3em;
+    right: 0.3em;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 2em;
+  }
+  .swiper-slide .content-slide > h3{
+    font-size: 1.4em;
+  }
 
+  .container-navigation {
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+  }
 }
 
 
