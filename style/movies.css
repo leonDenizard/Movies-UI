@@ -1052,6 +1052,99 @@ header.container-menu.active{
   }
 }
 
+@media (min-width: 1024px) {
+  
+  body, html{
+    overflow: visible;
+  }
+  body{
+    display: flex;
+    /* overflow-x: visible; */
+  }
+  .container-icon{
+    display: none;
+  }
 
+  header.container-menu{
+    display: none;
+  }
+  .container-navigation{
+    position: relative;
+    width: 16rem;
+    border-right: 2px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+  .container-navigation .title{
+    display: block;
+    border-bottom: 2px solid var(--border-color);
+    height: 6rem;
+    width: 100%;
+  }
+  .container-navigation .title h1{
+    font-size: 3rem;
+    font-family: 'inter';
+    letter-spacing: 5px;
+  }
+  .container-navigation * span{
+    display: block;
+  }
+
+  .container-navigation ul.list-link{
+    position: static;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    border: none;
+    width: 100%;
+    backdrop-filter: none;
+  }
+  .container-navigation > ul::before{
+    display: none;
+  }
+  .container-navigation > ul::after{
+    display: none;
+  }
+  .container-navigation ul > li.active::before{
+    content: '';
+    width: 8px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: #fff;
+    filter: drop-shadow(0 0 4rem #fff);
+    position: absolute;
+    left: 10px;
+  }
+  .container-navigation ul > li a{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+ 
+  .container-navigation ul > li a i{
+    font-size: 2.1rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .container-navigation ul > li a span{
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .container-navigation > ul > li > a > i{
+    font-size: 2.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+  }
+  .container-movie{
+    width: 800px;
+  }
+  .wrapper-movie-main #background{}
+}
   
 
