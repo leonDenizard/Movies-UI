@@ -1062,11 +1062,11 @@ header.container-menu.active{
     /* overflow-x: visible; */
   }
   .container-icon{
-    display: none;
+    display: block;
   }
 
   header.container-menu{
-    display: none;
+    display: block;
   }
   .container-navigation{
     position: relative;
