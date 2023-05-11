@@ -1063,11 +1063,52 @@ header.container-menu.active{
   }
   .container-icon{
     display: block;
+    cursor: pointer;
   }
 
   header.container-menu{
     display: block;
+    border-left: 2px solid var(--border-color);
   }
+  header.container-menu.active{
+    right: 0;
+    width: 30%;
+    z-index: 4;
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: 1;
+
+  }
+  .container-menu .title-menu h1{
+    font-size: 2.5rem;
+  }
+  .container-menu .title-menu h3{
+    position: relative;
+    font-size: 1rem;
+    padding-bottom: 20px;
+  }
+  .container-menu ul{
+    gap: 0.5em;
+  }
+  .container-menu ul > li:hover > a{
+    color: #fff;
+    transition: all 0.3s ease-in;
+  }
+  .container-menu ul > li.active::before{
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-image: var(--font-h1-color);
+    position: absolute;
+    left: -20px;
+  }
+  .container-menu ul li > a{
+    transition: all 0.3s ease-in;
+    font-size: 1rem;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
   .container-navigation{
     position: relative;
     width: 16rem;
