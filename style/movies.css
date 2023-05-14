@@ -1186,6 +1186,25 @@ header.container-menu.active{
     width: 800px;
   }
   .wrapper-movie-main #background{}
+
+  .container-movie .wrapper-movie-result{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .container-movie .wrapper-movie-result .swiper, .swiper-pagination{
+    display: none;
+  }
+
+  .container-movie .wrapper-movie-result .wrapper-movie{
+    width: 250px;
+    position: relative;
+  }
+  .wrapper-movie > img{
+    width: 250px;
+  }
 }
   
 

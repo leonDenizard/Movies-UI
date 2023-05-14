@@ -113,6 +113,11 @@ async function loadMovies(apiUrl){
     changeBackground(movies[0])
     changeColorFavorite()
 
+    
+    if(window.innerWidth >= 1024){
+      clearSwiper()
+    }
+
   } catch (error) {
     console.log(error)
   }
@@ -201,7 +206,6 @@ async function searchMovieApi(api){
       }
       
     })
-
     
   } catch (error) {
     console.log(error)
@@ -230,3 +234,4 @@ function searchInput(){
 }
 
 searchInput()
+
