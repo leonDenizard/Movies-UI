@@ -78,6 +78,45 @@ function clearSwiper(){
   swiperWrapper.innerHTML = ''
 }
 
+function createGrid(src, titulo){
+  // Ponto onde será criado os filmes via js
+  const wrapperMovieResult = document.querySelector('.wrapper-movie-result')
+
+  // Criar a div wrapper-movie e adicionar a classe .wrapper-movie
+  const wrapperMovie = document.createElement('div')
+  wrapperMovie.classList.add('wrapper-movie')
+
+  //Adicionando a div dentro do wrapper pai
+  wrapperMovieResult.appendChild(wrapperMovie)
+
+  //criando a imagem que recebera o src da API
+  const imgMovie = document.createElement('img')
+  imgMovie.src = src
+
+  //Adicionando a imagem ao wrapper-movie
+  wrapperMovie.appendChild(imgMovie)
+
+  // Criado o icone do coração e adicionando as classe e inserindo dentro de wrapper-movie
+  const i = document.createElement('i')
+  i.classList.add('fa-sharp')
+  i.classList.add('fa-solid')
+  i.classList.add('fa-heart')
+  wrapperMovie.appendChild(i)
+
+  //Criando a div title movie e adicionando no wrapper-movie
+  const titleMovie = document.createElement('div')
+  titleMovie.classList.add('title-movie')
+  wrapperMovie.appendChild(titleMovie)
+
+  //Criando o texto do titulo e atribuindo o valor da API
+  const tituloP = document.createElement('p')
+  tituloP.textContent = titulo
+  titleMovie.appendChild(tituloP)
+
+
+}
+
+
 const key = 'fd298ef799ed7bc469fd73887cdfcc2e'
 
 function getGenresID(link){
@@ -116,6 +155,10 @@ async function loadMovies(apiUrl){
     
     if(window.innerWidth >= 1024){
       clearSwiper()
+
+      movies.forEach(movie =>{
+        createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+      })
     }
 
   } catch (error) {
