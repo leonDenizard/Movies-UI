@@ -117,14 +117,14 @@ function createGrid(src, titulo){
 
 //Função responsável por limpar o grid para não acumular filmes ao filtrar 
 function clearGrid(){
-  // Limpar o container todo
+  // Limpar o wrapper-movie criado via js
   const wrapperMovie = document.querySelectorAll('.wrapper-movie')
+  //Verifica se existe o elemento e percorre cada um limpando seu conteudo e depois é criado novos wrapper-movie
   if(wrapperMovie){
     wrapperMovie.forEach(wrapper =>{
       wrapper.innerHTML = ''
     })
   }
-  
 
 }
 
@@ -175,6 +175,8 @@ async function loadMovies(apiUrl){
       movies.forEach(movie =>{
         createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
       })
+
+      changeColorFavoriteDesktop()
     }
 
   } catch (error) {
@@ -207,6 +209,14 @@ loadMoviesGenres()
 
 function changeColorFavorite(){
   const icone = document.querySelectorAll('.swiper-slide .content-slide > i')
+  icone.forEach(i =>{
+    i.addEventListener('click', ()=>{
+      i.classList.toggle('active')
+    })
+  })
+}
+function changeColorFavoriteDesktop(){
+  const icone = document.querySelectorAll('.wrapper-movie > i')
   icone.forEach(i =>{
     i.addEventListener('click', ()=>{
       i.classList.toggle('active')
