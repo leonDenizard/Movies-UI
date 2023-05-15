@@ -113,6 +113,18 @@ function createGrid(src, titulo){
   tituloP.textContent = titulo
   titleMovie.appendChild(tituloP)
 
+}
+
+//Função responsável por limpar o grid para não acumular filmes ao filtrar 
+function clearGrid(){
+  // Limpar o container todo
+  const wrapperMovie = document.querySelectorAll('.wrapper-movie')
+  if(wrapperMovie){
+    wrapperMovie.forEach(wrapper =>{
+      wrapper.innerHTML = ''
+    })
+  }
+  
 
 }
 
@@ -128,6 +140,7 @@ function buildApiUrl(genreID){
   return `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc&with_genres=${genreID}&page=${page}`
 }
 
+
 async function loadMovies(apiUrl){
   try {
 
@@ -137,6 +150,7 @@ async function loadMovies(apiUrl){
     const movies = data.results;
     
     clearSwiper()
+    
 
     movies.forEach((movie, index) =>{
 
@@ -152,9 +166,11 @@ async function loadMovies(apiUrl){
     changeBackground(movies[0])
     changeColorFavorite()
 
-    
+    // Caso telas maiores que 1024px não terá swiper e op resultado será mostrado via grid
     if(window.innerWidth >= 1024){
       clearSwiper()
+      clearGrid()
+      
 
       movies.forEach(movie =>{
         createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
