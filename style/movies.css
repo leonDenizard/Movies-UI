@@ -1208,6 +1208,7 @@ header.container-menu.active{
   .wrapper-movie > img{
     max-height: 280px;
     max-width: 200px;
+    border-radius: 10px;
   }
   .wrapper-movie > i{
     position: absolute;
@@ -1239,6 +1240,24 @@ header.container-menu.active{
     100% {
       transform: scale(1);
     }
+  }
+  .wrapper-movie .title-movie{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    padding: 0.5em;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+  }
+  .wrapper-movie .title-movie > p{
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 1.2em;
+    line-height: 100%;
+    background-image: linear-gradient(to right, #d644ff, #ff0095, #ff651a, #e6b800);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
 }
