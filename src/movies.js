@@ -172,11 +172,17 @@ async function loadMovies(apiUrl){
       clearGrid()
       
 
-      movies.forEach(movie =>{
+      movies.forEach((movie, index) =>{
         createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+        
+        const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
+        wrapperMovie.addEventListener('click', ()=>{
+          changeBackground(movie)
+        })
       })
 
       changeColorFavoriteDesktop()
+      
     }
 
   } catch (error) {
