@@ -1060,6 +1060,7 @@ header.container-menu.active{
   body{
     display: flex;
     /* overflow-x: visible; */
+    background-image: url();
   }
   .container-icon{
     display: block;
@@ -1071,13 +1072,13 @@ header.container-menu.active{
     border-left: 2px solid var(--border-color);
   }
   header.container-menu.active{
+    position: fixed;
     right: 0;
     width: 30%;
     z-index: 4;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.5);
     opacity: 1;
     height: 100%;
-    border-bottom: 2px solid var(--border-color);
   }
   .container-menu .title-menu h1{
     font-size: 2.5rem;
@@ -1088,7 +1089,7 @@ header.container-menu.active{
     padding-bottom: 20px;
   }
   .container-menu ul{
-    gap: 0.5em;
+    gap: 0.1em;
   }
   .container-menu ul > li:hover > a{
     color: #fff;
@@ -1111,13 +1112,14 @@ header.container-menu.active{
   }
 
   .container-navigation{
-    position: relative;
+    position: fixed;
     width: 16rem;
     border-right: 2px solid var(--border-color);
     background-color: rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     padding: 2rem;
+    height: 100%;
   }
   .container-navigation .title{
     display: block;
@@ -1136,7 +1138,7 @@ header.container-menu.active{
 
   .container-navigation ul.list-link{
     position: static;
-    height: 60%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -1184,9 +1186,11 @@ header.container-menu.active{
     padding: 0;
   }
   .container-movie{
-    width: 800px;
+    margin: 0 22rem auto;
   }
-  .wrapper-movie-main #background{}
+  .wrapper-movie-main #background{
+    
+  }
 
   .container-movie .wrapper-movie-result{
     display: grid;
