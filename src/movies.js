@@ -115,17 +115,13 @@ function createGrid(src, titulo){
 
 }
 
-//Função responsável por limpar o grid para não acumular filmes ao filtrar 
-function clearGrid(){
-  // Limpar o wrapper-movie criado via js
-  const wrapperMovie = document.querySelectorAll('.wrapper-movie')
-  //Verifica se existe o elemento e percorre cada um limpando seu conteudo e depois é criado novos wrapper-movie
-  if(wrapperMovie){
-    wrapperMovie.forEach(wrapper =>{
-      wrapper.innerHTML = ''
-    })
+function clearGrid() {
+  const wrapperMovie = document.querySelectorAll('.wrapper-movie');
+  if (wrapperMovie) {
+    wrapperMovie.forEach((wrapper) => {
+      wrapper.remove(); // Remover o elemento do DOM
+    });
   }
-
 }
 
 
@@ -155,7 +151,7 @@ async function loadMovies(apiUrl){
     movies.forEach((movie, index) =>{
 
       criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
-
+      
       //Criado vinculo entre o slide criado com o index do filme na api para poder carregar os dados pelo click
       const slide = document.querySelectorAll('.swiper-slide')[index]
       slide.addEventListener('click', ()=>{
@@ -177,10 +173,11 @@ async function loadMovies(apiUrl){
         
         const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
         wrapperMovie.addEventListener('click', ()=>{
+          console.log('aqui 1')
           changeBackground(movie)
         })
       })
-
+      changeBackground(movies[0])
       changeColorFavoriteDesktop()
       
     }
