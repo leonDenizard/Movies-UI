@@ -283,6 +283,26 @@ async function searchMovieApi(api){
       }
       
     })
+
+    // Caso telas maiores que 1024px não terá swiper e op resultado será mostrado via grid
+    if(window.innerWidth >= 1024){
+      clearSwiper()
+      clearGrid()
+      
+
+      movies.forEach((movie, index) =>{
+        createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+        
+        const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
+        wrapperMovie.addEventListener('click', ()=>{
+          changeBackground(movie)
+        })
+      })
+      changeBackground(movies[0])
+      changeColorFavoriteDesktop()
+      
+    }
+
     
   } catch (error) {
     console.log(error)
