@@ -237,8 +237,10 @@ function changeBackground(movie){
 
   const imgBackground = document.querySelector('#background')
   const imdbDiv = document.querySelector('.avaliation-data')
+  if(movie.backdrop_path){
+    imgBackground.src = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
+  }
   
-  imgBackground.src = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
   imdbDiv.textContent = `${movie.vote_average.toFixed(1)} IMDB`
 
 }
@@ -272,6 +274,7 @@ async function searchMovieApi(api){
       
     })
 
+    
     changeBackground(movies[0])
     changeColorFavorite()
 
@@ -291,7 +294,10 @@ async function searchMovieApi(api){
       
 
       movies.forEach((movie, index) =>{
-        createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+        if(movie.poster_path){
+          createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+        }
+        
         
         const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
         wrapperMovie.addEventListener('click', ()=>{
