@@ -1056,6 +1056,7 @@ header.container-menu.active{
   
   body, html{
     overflow: visible;
+    scroll-behavior: smooth;
   }
   body{
     display: flex;
@@ -1189,7 +1190,25 @@ header.container-menu.active{
     margin: 0 22rem auto;
   }
   .wrapper-movie-main #background{
-    
+    height: 24rem;
+    object-fit: cover;
+  }
+  .wrapper-movie-main .wrapper-data .avaliation{
+    font-size: 0.8rem;
+  }
+
+  .container-movie .wrapper-search{
+    width: 95%;
+    position: sticky;
+    top: 5px;
+    z-index: 2;
+  }
+  .container-movie .wrapper-search input#search{
+    backdrop-filter: blur(20px);
+    font-size: 1.2em;
+  }
+  .container-movie .wrapper-search  i.ph-magnifying-glass{
+    cursor: pointer;
   }
 
   .container-movie .wrapper-movie-result{
@@ -1198,6 +1217,7 @@ header.container-menu.active{
     max-width: 90%;
     margin: 0 auto;
     gap: 20px;
+    height: 100%;
   }
 
   .container-movie .wrapper-movie-result .swiper, .swiper-pagination{
@@ -1205,16 +1225,15 @@ header.container-menu.active{
   }
 
   .container-movie .wrapper-movie-result .wrapper-movie{
-    max-height: 280px;
-    max-width: 200px;
+    height: 280px;
+    width: 200px;
     position: relative;
     cursor: pointer;
   }
   
   .wrapper-movie > img{
-    max-height: 280px;
-    max-width: 200px;
-    border-radius: 10px;
+    height: 280px;
+    width: 200px;
   }
   .wrapper-movie > i{
     position: absolute;
@@ -1254,7 +1273,7 @@ header.container-menu.active{
     padding: 0.5em;
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .wrapper-movie .title-movie > p{
     font-weight: 600;

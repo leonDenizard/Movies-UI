@@ -85,6 +85,8 @@ function createGrid(src, titulo){
   // Criar a div wrapper-movie e adicionar a classe .wrapper-movie
   const wrapperMovie = document.createElement('div')
   wrapperMovie.classList.add('wrapper-movie')
+  wrapperMovie.setAttribute('data-tilt', '')
+  wrapperMovie.style.transformStyle = 'preserve-3d';
 
   //Adicionando a div dentro do wrapper pai
   wrapperMovieResult.appendChild(wrapperMovie)
@@ -101,11 +103,13 @@ function createGrid(src, titulo){
   i.classList.add('fa-sharp')
   i.classList.add('fa-solid')
   i.classList.add('fa-heart')
+  i.style.transform = 'translateZ(20px)';
   wrapperMovie.appendChild(i)
 
   //Criando a div title movie e adicionando no wrapper-movie
   const titleMovie = document.createElement('div')
   titleMovie.classList.add('title-movie')
+  titleMovie.style.transform = 'translateZ(20px)'
   wrapperMovie.appendChild(titleMovie)
 
   //Criando o texto do titulo e atribuindo o valor da API
@@ -113,13 +117,15 @@ function createGrid(src, titulo){
   tituloP.textContent = titulo
   titleMovie.appendChild(tituloP)
 
+  initTilt()
+
 }
 
 function clearGrid() {
   const wrapperMovie = document.querySelectorAll('.wrapper-movie');
   if (wrapperMovie) {
     wrapperMovie.forEach((wrapper) => {
-      wrapper.remove(); // Remover o elemento do DOM
+      wrapper.remove(); // Remover o elemento da DOM completamente
     });
   }
 }
@@ -173,7 +179,6 @@ async function loadMovies(apiUrl){
         
         const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
         wrapperMovie.addEventListener('click', ()=>{
-          console.log('aqui 1')
           changeBackground(movie)
         })
       })
@@ -306,4 +311,15 @@ function searchInput(){
 }
 
 searchInput()
+
+function initTilt(){
+  VanillaTilt.init(document.querySelectorAll(".wrapper-movie"), {
+		max: 25,
+		speed: 1000,
+    glare: true,
+    "max-glare": 0.6,
+    
+	});
+
+}
 
