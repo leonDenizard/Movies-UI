@@ -184,7 +184,7 @@ async function loadMovies(apiUrl){
       })
       changeBackground(movies[0])
       changeColorFavoriteDesktop()
-      
+      pageTop()
     }
 
   } catch (error) {
@@ -306,7 +306,7 @@ async function searchMovieApi(api){
       })
       changeBackground(movies[0])
       changeColorFavoriteDesktop()
-      
+      pageTop()
     }
 
     
@@ -341,7 +341,7 @@ searchInput()
 function initTilt(){
   VanillaTilt.init(document.querySelectorAll(".wrapper-movie"), {
 		max: 25,
-		speed: 1000,
+		speed: 2000,
     glare: true,
     "max-glare": 0.6,
     
@@ -349,3 +349,16 @@ function initTilt(){
 
 }
 
+function pageTop(){
+
+  const images = document.querySelectorAll('.wrapper-movie img')
+  images.forEach(image =>{
+    image.addEventListener('click', ()=>{
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    })
+  })
+  
+}
