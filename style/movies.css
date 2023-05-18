@@ -1190,11 +1190,36 @@ header.container-menu.active{
     margin: 0 22rem auto;
   }
   .wrapper-movie-main #background{
-    height: 24rem;
+    top: 20px;
+    position: relative;
+    margin: 0 6rem auto;
+    height: 18rem;
+    width: 75%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     object-fit: cover;
+    margin-bottom: 25px;
+  }
+  .wrapper-movie-main #background::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #FFF;
+  }
+  .container-movie .wrapper-movie-main .wrapper-data{
+    margin: 0 7rem auto;
+    width: 70%;
   }
   .wrapper-movie-main .wrapper-data .avaliation{
     font-size: 0.8rem;
+  }
+  .wrapper-movie-main .wrapper-data .avaliation .play{
+    padding: 5px 15px;
+    backdrop-filter: blur(8px);
+    background-color: transparent;
   }
 
   .container-movie .wrapper-search{
@@ -1225,15 +1250,15 @@ header.container-menu.active{
   }
 
   .container-movie .wrapper-movie-result .wrapper-movie{
-    height: 280px;
-    width: 200px;
+    height: 250px;
+    width: 180px;
     position: relative;
     cursor: pointer;
   }
   
   .wrapper-movie > img{
-    height: 280px;
-    width: 200px;
+    height: 250px;
+    width: 180px;
   }
   .wrapper-movie > i{
     position: absolute;
