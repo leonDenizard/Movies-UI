@@ -181,10 +181,26 @@ async function loadMovies(apiUrl){
         wrapperMovie.addEventListener('click', ()=>{
           changeBackground(movie)
         })
+
+        const favourite = document.querySelectorAll('.wrapper-movie > i')[index]
+        favourite.addEventListener('click', ()=>{
+            console.log(movie.id)
+            const movieId = movie.id
+
+            localStorage.setItem('movieId', JSON.stringify(movieId))
+        })
+        
       })
+
+
       changeBackground(movies[0])
       changeColorFavoriteDesktop()
       pageTop()
+
+      
+
+      
+      
     }
 
   } catch (error) {
@@ -307,6 +323,7 @@ async function searchMovieApi(api){
       changeBackground(movies[0])
       changeColorFavoriteDesktop()
       pageTop()
+
     }
 
     
@@ -362,3 +379,5 @@ function pageTop(){
   })
   
 }
+
+

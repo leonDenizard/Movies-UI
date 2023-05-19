@@ -1169,6 +1169,7 @@
     letter-spacing: 5px;
     font-family: 'Righteous';
     color: rgba(255, 255, 255, 0.8);
+    mix-blend-mode: color-burn;
     text-transform: uppercase;
   }
 

@@ -1081,8 +1081,15 @@ header.container-menu.active{
     opacity: 1;
     height: 100%;
   }
+  .container-navigation .title{
+    border-bottom: 2px solid var(--border-color);
+    height: 6rem;
+  }
+
   .container-menu .title-menu h1{
-    font-size: 2.5rem;
+    font-size: 3rem;
+    font-family: 'inter';
+    letter-spacing: 5px;
   }
   .container-menu .title-menu h3{
     position: relative;
@@ -1090,6 +1097,7 @@ header.container-menu.active{
     padding-bottom: 20px;
   }
   .container-menu ul{
+    height: 60%;
     gap: 0.1em;
   }
   .container-menu ul > li:hover > a{
@@ -1138,14 +1146,16 @@ header.container-menu.active{
   }
 
   .container-navigation ul.list-link{
+    padding-top: 2rem;
     position: static;
-    height: 100%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-evenly;
     border: none;
     width: 100%;
+    gap: 1rem;
     backdrop-filter: none;
   }
   .container-navigation > ul::before{
@@ -1200,15 +1210,6 @@ header.container-menu.active{
     object-fit: cover;
     margin-bottom: 25px;
   }
-  .wrapper-movie-main #background::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background-color: #FFF;
-  }
   .container-movie .wrapper-movie-main .wrapper-data{
     margin: 0 7rem auto;
     width: 70%;
@@ -1217,7 +1218,7 @@ header.container-menu.active{
     font-size: 0.8rem;
   }
   .wrapper-movie-main .wrapper-data .avaliation .play{
-    padding: 5px 15px;
+    padding: 8px 15px 8px 10px;
     backdrop-filter: blur(8px);
     background-color: transparent;
   }
@@ -1255,7 +1256,7 @@ header.container-menu.active{
     position: relative;
     cursor: pointer;
   }
-  
+    
   .wrapper-movie > img{
     height: 250px;
     width: 180px;
