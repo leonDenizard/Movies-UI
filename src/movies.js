@@ -169,44 +169,61 @@ async function loadMovies(apiUrl){
     changeColorFavorite()
 
     // Caso telas maiores que 1024px não terá swiper e op resultado será mostrado via grid
-    if(window.innerWidth >= 1024){
-      clearSwiper()
-      clearGrid()
+    function handleWindowResize() {
       
+      if (window.innerWidth >= 1024) {
+        clearSwiper();
+        clearGrid();
 
-      movies.forEach((movie, index) =>{
-        createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
-        
-        const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
-        wrapperMovie.addEventListener('click', ()=>{
-          changeBackground(movie)
+        const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
+
+        movies.forEach((movie, index) => {
+          createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+
+          const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
+          wrapperMovie.addEventListener('click', () => {
+            changeBackground(movie)
+          })
+
+          const favourite = document.querySelectorAll('.wrapper-movie > i')[index];
+
+          // Verifique se o filme está nos favoritos e adicione a classe 'active' se necessário
+          if (savedMovieIds.includes(movie.id)) {
+            favourite.classList.add('active');
+          }
+
+          favourite.addEventListener('click', () => {
+            const movieId = movie.id;
+
+            // Adicione ou remova a classe 'active' ao clicar no ícone de favoritos
+            favourite.classList.toggle('active');
+
+            // Verifique se o filme está nos favoritos após o toggle
+            if (favourite.classList.contains('active')) {
+              addToFavorites(movieId);
+            } else {
+              removeFromFavorites(movieId);
+            }
+          })
+
+          
         })
 
-        const favourite = document.querySelectorAll('.wrapper-movie > i')[index];
-        favourite.addEventListener('click', () => {
-          
-          const movieId = movie.id;
-          if(!favourite.classList.contains('active')){
-            addToFavorites(movieId);
-          }else{
-            removeFromFavorites(movieId)
-          }
-          
-        });
-
-        
-      })
-
-
-      changeBackground(movies[0])
-      changeColorFavoriteDesktop()
-      pageTop()
-
-      
-
-      
-      
+        changeBackground(movies[0])
+        // changeColorFavoriteDesktop()
+        pageTop()
+        // localStorage.clear();
+      }
     }
+
+    // Adicione o evento de redimensionamento da janela
+    window.addEventListener('resize', handleWindowResize);
+
+    // Chame a função pela primeira vez
+    handleWindowResize();
+
+    
+
 
   } catch (error) {
     console.log(error)
