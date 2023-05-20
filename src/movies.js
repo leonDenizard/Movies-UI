@@ -182,13 +182,18 @@ async function loadMovies(apiUrl){
           changeBackground(movie)
         })
 
-        const favourite = document.querySelectorAll('.wrapper-movie > i')[index]
-        favourite.addEventListener('click', ()=>{
-            console.log(movie.id)
-            const movieId = movie.id
+        const favourite = document.querySelectorAll('.wrapper-movie > i')[index];
+        favourite.addEventListener('click', () => {
+          
+          const movieId = movie.id;
+          if(!favourite.classList.contains('active')){
+            addToFavorites(movieId);
+          }else{
+            removeFromFavorites(movieId)
+          }
+          
+        });
 
-            localStorage.setItem('movieId', JSON.stringify(movieId))
-        })
         
       })
 
@@ -207,6 +212,35 @@ async function loadMovies(apiUrl){
     console.log(error)
   }
 }
+
+function addToFavorites(movieId) {
+  // Verificar se já existem IDs de filmes salvos no localStorage
+  const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
+
+  // Verificar se o ID do filme já foi adicionado anteriormente
+  if (!savedMovieIds.includes(movieId)) {
+    savedMovieIds.push(movieId);
+  }
+
+  // Salvar a lista atualizada de IDs de filmes no localStorage
+  localStorage.setItem('movieIds', JSON.stringify(savedMovieIds));
+}
+
+function removeFromFavorites(movieId) {
+  // Verificar se já existem IDs de filmes salvos no localStorage
+  const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
+
+  // Verificar se o ID do filme está presente na lista de favoritos
+  const index = savedMovieIds.indexOf(movieId);
+  if (index > -1) {
+    savedMovieIds.splice(index, 1);
+  }
+
+  // Salvar a lista atualizada de IDs de filmes no localStorage
+  localStorage.setItem('movieIds', JSON.stringify(savedMovieIds));
+}
+
+
 
 function loadMoviesGenres(){
   const linkGenres = document.querySelectorAll('header ul li > a')
