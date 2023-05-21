@@ -153,6 +153,7 @@ async function loadMovies(apiUrl){
     
     clearSwiper()
     
+    const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || []
 
     movies.forEach((movie, index) =>{
 
@@ -163,10 +164,33 @@ async function loadMovies(apiUrl){
       slide.addEventListener('click', ()=>{
         changeBackground(movie)
       })
+
+      const favourite = document.querySelectorAll('.content-slide > i')[index];
+
+      // Verifique se o filme está nos favoritos e adicione a classe 'active' se necessário
+      if (savedMovieIds.includes(movie.id)) {
+          favourite.classList.add('active');
+      }
+
+      favourite.addEventListener('click', () => {
+        const movieId = movie.id;
+
+        // Adicione ou remova a classe 'active' ao clicar no ícone de favoritos
+        favourite.classList.toggle('active');
+
+        // Verifique se o filme está nos favoritos após o toggle
+        if (favourite.classList.contains('active')) {
+          addToFavoritesLocalStorage(movieId);
+        } else {
+          removeFromFavoritesLocalStorage(movieId);
+        }
+      })
+
+
     })
 
     changeBackground(movies[0])
-    changeColorFavorite()
+    
 
     // Caso telas maiores que 1024px não terá swiper e op resultado será mostrado via grid
     function handleWindowResize() {
@@ -175,7 +199,7 @@ async function loadMovies(apiUrl){
         clearSwiper();
         clearGrid();
 
-        const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
+        const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || []
 
         movies.forEach((movie, index) => {
           createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
@@ -200,9 +224,9 @@ async function loadMovies(apiUrl){
 
             // Verifique se o filme está nos favoritos após o toggle
             if (favourite.classList.contains('active')) {
-              addToFavorites(movieId);
+              addToFavoritesLocalStorage(movieId);
             } else {
-              removeFromFavorites(movieId);
+              removeFromFavoritesLocalStorage(movieId);
             }
           })
 
@@ -230,7 +254,8 @@ async function loadMovies(apiUrl){
   }
 }
 
-function addToFavorites(movieId) {
+// Função para adicionar um filme aos favoritos no localStorage
+function addToFavoritesLocalStorage(movieId) {
   // Verificar se já existem IDs de filmes salvos no localStorage
   const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
 
@@ -243,7 +268,8 @@ function addToFavorites(movieId) {
   localStorage.setItem('movieIds', JSON.stringify(savedMovieIds));
 }
 
-function removeFromFavorites(movieId) {
+// Função para remover um filme dos favoritos no localStorage
+function removeFromFavoritesLocalStorage(movieId) {
   // Verificar se já existem IDs de filmes salvos no localStorage
   const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
 
@@ -256,6 +282,7 @@ function removeFromFavorites(movieId) {
   // Salvar a lista atualizada de IDs de filmes no localStorage
   localStorage.setItem('movieIds', JSON.stringify(savedMovieIds));
 }
+
 
 
 
