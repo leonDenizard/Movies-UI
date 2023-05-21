@@ -32,53 +32,54 @@ function loadSwiper() {
       el: ".swiper-pagination",
       clickable: true,
     },
-    
+
   })
+
 }
 loadSwiper();
 
 
 function criaSwiperSlideImg(src, titulo) {
-    //Cria a div swiper-slide e adiciona a classe swipper-slide
-    const swiperSlide = document.createElement('div')
-    swiperSlide.classList.add('swiper-slide')
+  //Cria a div swiper-slide e adiciona a classe swipper-slide
+  const swiperSlide = document.createElement('div')
+  swiperSlide.classList.add('swiper-slide')
 
-    //cria a div com a classe content-slide
-    const divContentSlide = document.createElement('div')
-    divContentSlide.classList.add('content-slide')
+  //cria a div com a classe content-slide
+  const divContentSlide = document.createElement('div')
+  divContentSlide.classList.add('content-slide')
 
-    //cria img e atribui o src do parametro
-    const img = document.createElement('img')
-    img.src = src
+  //cria img e atribui o src do parametro
+  const img = document.createElement('img')
+  img.src = src
 
-    //cria o icone e adiciona a classe do phosphoricon
-    const i = document.createElement('i')
-    i.classList.add('fa-sharp')
-    i.classList.add('fa-solid')
-    i.classList.add('fa-heart')
+  //cria o icone e adiciona a classe do phosphoricon
+  const i = document.createElement('i')
+  i.classList.add('fa-sharp')
+  i.classList.add('fa-solid')
+  i.classList.add('fa-heart')
 
-    //cria o titulo do filme e atualiza com titulo do parametro
-    const tituloH3 = document.createElement('h3')
-    tituloH3.textContent = titulo
+  //cria o titulo do filme e atualiza com titulo do parametro
+  const tituloH3 = document.createElement('h3')
+  tituloH3.textContent = titulo
 
-    //Seleciona o ponto onde será incluído o swiper-slide
-    const swiperWrapper = document.querySelector('.swiper-wrapper')
-    swiperWrapper.appendChild(swiperSlide)
+  //Seleciona o ponto onde será incluído o swiper-slide
+  const swiperWrapper = document.querySelector('.swiper-wrapper')
+  swiperWrapper.appendChild(swiperSlide)
 
-    //Adiciona a div content-slide dentro do swiper-slide
-    swiperSlide.appendChild(divContentSlide)
-    //Adiciona o restante dos elementos dentro da div content-slide
-    divContentSlide.appendChild(img)
-    divContentSlide.appendChild(i)
-    divContentSlide.appendChild(tituloH3)
+  //Adiciona a div content-slide dentro do swiper-slide
+  swiperSlide.appendChild(divContentSlide)
+  //Adiciona o restante dos elementos dentro da div content-slide
+  divContentSlide.appendChild(img)
+  divContentSlide.appendChild(i)
+  divContentSlide.appendChild(tituloH3)
 }
 
-function clearSwiper(){
+function clearSwiper() {
   const swiperWrapper = document.querySelector('.swiper-wrapper')
   swiperWrapper.innerHTML = ''
 }
 
-function createGrid(src, titulo){
+function createGrid(src, titulo) {
   // Ponto onde será criado os filmes via js
   const wrapperMovieResult = document.querySelector('.wrapper-movie-result')
 
@@ -133,68 +134,29 @@ function clearGrid() {
 
 const key = 'fd298ef799ed7bc469fd73887cdfcc2e'
 
-function getGenresID(link){
+function getGenresID(link) {
   return link.getAttribute('id')
 }
 const page = 1;
 
-function buildApiUrl(genreID){
+function buildApiUrl(genreID) {
   return `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc&with_genres=${genreID}&page=${page}`
 }
 
 
-async function loadMovies(apiUrl){
+async function loadMovies(apiUrl) {
   try {
 
     const response = await fetch(apiUrl)
     const data = await response.json()
 
     const movies = data.results;
-    
-    clearSwiper()
-    
-    const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || []
-
-    movies.forEach((movie, index) =>{
-
-      criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
-      
-      //Criado vinculo entre o slide criado com o index do filme na api para poder carregar os dados pelo click
-      const slide = document.querySelectorAll('.swiper-slide')[index]
-      slide.addEventListener('click', ()=>{
-        changeBackground(movie)
-      })
-
-      const favourite = document.querySelectorAll('.content-slide > i')[index];
-
-      // Verifique se o filme está nos favoritos e adicione a classe 'active' se necessário
-      if (savedMovieIds.includes(movie.id)) {
-          favourite.classList.add('active');
-      }
-
-      favourite.addEventListener('click', () => {
-        const movieId = movie.id;
-
-        // Adicione ou remova a classe 'active' ao clicar no ícone de favoritos
-        favourite.classList.toggle('active');
-
-        // Verifique se o filme está nos favoritos após o toggle
-        if (favourite.classList.contains('active')) {
-          addToFavoritesLocalStorage(movieId);
-        } else {
-          removeFromFavoritesLocalStorage(movieId);
-        }
-      })
 
 
-    })
-
-    changeBackground(movies[0])
-    
 
     // Caso telas maiores que 1024px não terá swiper e op resultado será mostrado via grid
     function handleWindowResize() {
-      
+
       if (window.innerWidth >= 1024) {
         clearSwiper();
         clearGrid();
@@ -230,13 +192,57 @@ async function loadMovies(apiUrl){
             }
           })
 
-          
+
         })
 
         changeBackground(movies[0])
         // changeColorFavoriteDesktop()
         pageTop()
         // localStorage.clear();
+      } else {
+
+        // console.log('tela menor, tela como tamanho = ', window.innerWidth)
+        clearGrid()
+        clearSwiper()
+
+        const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || []
+
+        movies.forEach((movie, index) => {
+
+          criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+
+          //Criado vinculo entre o slide criado com o index do filme na api para poder carregar os dados pelo click
+          const slide = document.querySelectorAll('.swiper-slide')[index]
+          slide.addEventListener('click', () => {
+            changeBackground(movie)
+          })
+
+          const favourite = document.querySelectorAll('.content-slide > i')[index];
+
+          // Verifique se o filme está nos favoritos e adicione a classe 'active' se necessário
+          if (savedMovieIds.includes(movie.id)) {
+            favourite.classList.add('active');
+          }
+
+          favourite.addEventListener('click', () => {
+            const movieId = movie.id;
+
+            // Adicione ou remova a classe 'active' ao clicar no ícone de favoritos
+            favourite.classList.toggle('active');
+
+            // Verifique se o filme está nos favoritos após o toggle
+            if (favourite.classList.contains('active')) {
+              addToFavoritesLocalStorage(movieId);
+            } else {
+              removeFromFavoritesLocalStorage(movieId);
+            }
+          })
+
+
+        })
+
+        changeBackground(movies[0])
+
       }
     }
 
@@ -246,7 +252,7 @@ async function loadMovies(apiUrl){
     // Chame a função pela primeira vez
     handleWindowResize();
 
-    
+
 
 
   } catch (error) {
@@ -286,12 +292,12 @@ function removeFromFavoritesLocalStorage(movieId) {
 
 
 
-function loadMoviesGenres(){
+function loadMoviesGenres() {
   const linkGenres = document.querySelectorAll('header ul li > a')
 
-  linkGenres.forEach( link => {
-    link.addEventListener('click', async event =>{
-      
+  linkGenres.forEach(link => {
+    link.addEventListener('click', async event => {
+
       const genreID = getGenresID(link)
       const apiUrl = buildApiUrl(genreID)
 
@@ -302,52 +308,52 @@ function loadMoviesGenres(){
       btnMenu.classList.remove('active')
     })
 
-    
+
   })
   linkGenres[0].click();
 }
 
 loadMoviesGenres()
 
-function changeColorFavorite(){
+function changeColorFavorite() {
   const icone = document.querySelectorAll('.swiper-slide .content-slide > i')
-  icone.forEach(i =>{
-    i.addEventListener('click', ()=>{
+  icone.forEach(i => {
+    i.addEventListener('click', () => {
       i.classList.toggle('active')
     })
   })
 }
-function changeColorFavoriteDesktop(){
+function changeColorFavoriteDesktop() {
   const icone = document.querySelectorAll('.wrapper-movie > i')
-  icone.forEach(i =>{
-    i.addEventListener('click', ()=>{
+  icone.forEach(i => {
+    i.addEventListener('click', () => {
       i.classList.toggle('active')
     })
   })
 }
 
 
-function changeBackground(movie){
+function changeBackground(movie) {
 
   const imgBackground = document.querySelector('#background')
   const imdbDiv = document.querySelector('.avaliation-data')
-  if(movie.backdrop_path){
+  if (movie.backdrop_path) {
     imgBackground.src = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
   }
-  
+
   imdbDiv.textContent = `${movie.vote_average.toFixed(1)} IMDB`
 
 }
 
-function buildQueryApi(query){
+function buildQueryApi(query) {
 
   const queryFormatade = query.toLowerCase().replace(/\s+/g, '+')
 
-  
+
   return `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${queryFormatade}&language=pt-BR`
 }
 
-async function searchMovieApi(api){
+async function searchMovieApi(api) {
   try {
     const response = await fetch(api)
     const data = await response.json()
@@ -357,44 +363,44 @@ async function searchMovieApi(api){
     clearSwiper()
 
     const slides = []
-    movies.forEach((movie, index) =>{
+    movies.forEach((movie, index) => {
 
-      if(movie.backdrop_path){
+      if (movie.backdrop_path) {
         criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
 
         const slide = document.querySelectorAll('.swiper-slide')[index]
         slides.push(slide)
       }
-      
+
     })
 
-    
+
     changeBackground(movies[0])
     changeColorFavorite()
 
-    slides.forEach((slide, index)=>{
-      if(slide){
-        slide.addEventListener('click', ()=>{
+    slides.forEach((slide, index) => {
+      if (slide) {
+        slide.addEventListener('click', () => {
           changeBackground(movies[index])
         })
       }
-      
+
     })
 
     // Caso telas maiores que 1024px não terá swiper e op resultado será mostrado via grid
-    if(window.innerWidth >= 1024){
+    if (window.innerWidth >= 1024) {
       clearSwiper()
       clearGrid()
-      
 
-      movies.forEach((movie, index) =>{
-        if(movie.poster_path){
+
+      movies.forEach((movie, index) => {
+        if (movie.poster_path) {
           createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
         }
-        
-        
+
+
         const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
-        wrapperMovie.addEventListener('click', ()=>{
+        wrapperMovie.addEventListener('click', () => {
           changeBackground(movie)
         })
       })
@@ -404,17 +410,17 @@ async function searchMovieApi(api){
 
     }
 
-    
+
   } catch (error) {
     console.log(error)
   }
 }
 
-function searchInput(){
+function searchInput() {
   const inputSearch = document.querySelector('#search')
   const form = document.querySelector('#form-search')
-  
-  form.addEventListener('submit', (event)=>{
+
+  form.addEventListener('submit', (event) => {
     event.preventDefault()
     const query = inputSearch.value
     const api = buildQueryApi(query)
@@ -425,37 +431,37 @@ function searchInput(){
 
     inputSearch.value = ""
 
-    
+
   })
-  
+
 
 }
 
 searchInput()
 
-function initTilt(){
+function initTilt() {
   VanillaTilt.init(document.querySelectorAll(".wrapper-movie"), {
-		max: 25,
-		speed: 2000,
+    max: 25,
+    speed: 2000,
     glare: true,
     "max-glare": 0.6,
-    
-	});
+
+  });
 
 }
 
-function pageTop(){
+function pageTop() {
 
   const images = document.querySelectorAll('.wrapper-movie img')
-  images.forEach(image =>{
-    image.addEventListener('click', ()=>{
+  images.forEach(image => {
+    image.addEventListener('click', () => {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
       })
     })
   })
-  
+
 }
 
 
