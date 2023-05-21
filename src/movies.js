@@ -247,12 +247,10 @@ async function loadMovies(apiUrl) {
     }
 
     // Adicione o evento de redimensionamento da janela
-    window.addEventListener('resize', handleWindowResize);
+    window.addEventListener('resize', handleWindowResize)
 
     // Chame a função pela primeira vez
-    handleWindowResize();
-
-
+    handleWindowResize()
 
 
   } catch (error) {
@@ -315,22 +313,22 @@ function loadMoviesGenres() {
 
 loadMoviesGenres()
 
-function changeColorFavorite() {
-  const icone = document.querySelectorAll('.swiper-slide .content-slide > i')
-  icone.forEach(i => {
-    i.addEventListener('click', () => {
-      i.classList.toggle('active')
-    })
-  })
-}
-function changeColorFavoriteDesktop() {
-  const icone = document.querySelectorAll('.wrapper-movie > i')
-  icone.forEach(i => {
-    i.addEventListener('click', () => {
-      i.classList.toggle('active')
-    })
-  })
-}
+// function changeColorFavorite() {
+//   const icone = document.querySelectorAll('.swiper-slide .content-slide > i')
+//   icone.forEach(i => {
+//     i.addEventListener('click', () => {
+//       i.classList.toggle('active')
+//     })
+//   })
+// }
+// function changeColorFavoriteDesktop() {
+//   const icone = document.querySelectorAll('.wrapper-movie > i')
+//   icone.forEach(i => {
+//     i.addEventListener('click', () => {
+//       i.classList.toggle('active')
+//     })
+//   })
+// }
 
 
 function changeBackground(movie) {
@@ -355,66 +353,110 @@ function buildQueryApi(query) {
 
 async function searchMovieApi(api) {
   try {
-    const response = await fetch(api)
-    const data = await response.json()
+    const response = await fetch(api);
+    const data = await response.json();
+    const movies = data.results;
 
-    const movies = data.results
+    (function () {
+      function handleWindowResize() {
+        // Caso telas maiores que 1024px não terá swiper e o resultado será mostrado via grid
+        if (window.innerWidth >= 1024) {
+          clearSwiper();
+          clearGrid();
 
-    clearSwiper()
+          const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
 
-    const slides = []
-    movies.forEach((movie, index) => {
+          movies.forEach((movie, index) => {
+            if (movie.poster_path) {
+              createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`);
+            }
 
-      if (movie.backdrop_path) {
-        criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+            const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index];
+            wrapperMovie.addEventListener('click', () => {
+              changeBackground(movie);
+            });
 
-        const slide = document.querySelectorAll('.swiper-slide')[index]
-        slides.push(slide)
-      }
+            const favourite = document.querySelectorAll('.wrapper-movie > i')[index];
 
-    })
+            if (savedMovieIds.includes(movie.id)) {
+              favourite.classList.add('active');
+            }
 
+            favourite.addEventListener('click', () => {
+              const movieId = movie.id;
+              favourite.classList.toggle('active');
 
-    changeBackground(movies[0])
-    changeColorFavorite()
+              // Verifique se o filme está nos favoritos após o toggle
+              if (favourite.classList.contains('active')) {
+                addToFavoritesLocalStorage(movieId);
+              } else {
+                removeFromFavoritesLocalStorage(movieId);
+              }
+            });
+          });
 
-    slides.forEach((slide, index) => {
-      if (slide) {
-        slide.addEventListener('click', () => {
-          changeBackground(movies[index])
-        })
-      }
+          changeBackground(movies[0]);
+          //changeColorFavoriteDesktop();
+          pageTop();
+        } else {
+          clearGrid();
+          clearSwiper();
 
-    })
+          const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
 
-    // Caso telas maiores que 1024px não terá swiper e op resultado será mostrado via grid
-    if (window.innerWidth >= 1024) {
-      clearSwiper()
-      clearGrid()
+          const slides = [];
 
+          movies.forEach((movie, index) => {
+            if (movie.backdrop_path) {
+              criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`);
+              const slide = document.querySelectorAll('.swiper-slide')[index];
+              slides.push(slide);
+            }
+          });
 
-      movies.forEach((movie, index) => {
-        if (movie.poster_path) {
-          createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+          slides.forEach((slide, index) => {
+            if (slide) {
+              slide.addEventListener('click', () => {
+                changeBackground(movies[index]);
+              });
+            }
+          });
+
+          const favourites = document.querySelectorAll('.content-slide > i');
+
+          favourites.forEach((favourite, index) => {
+            // Verifique se o filme está nos favoritos e adicione a classe 'active' se necessário
+            if (savedMovieIds.includes(movies[index].id)) {
+              favourite.classList.add('active');
+            }
+
+            favourite.addEventListener('click', () => {
+              const movieId = movies[index].id;
+
+              // Adicione ou remova a classe 'active' ao clicar no ícone de favoritos
+              favourite.classList.toggle('active');
+
+              // Verifique se o filme está nos favoritos após o toggle
+              if (favourite.classList.contains('active')) {
+                addToFavoritesLocalStorage(movieId);
+              } else {
+                removeFromFavoritesLocalStorage(movieId);
+              }
+            });
+          });
+
+          changeBackground(movies[0]);
         }
+      }
 
-
-        const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
-        wrapperMovie.addEventListener('click', () => {
-          changeBackground(movie)
-        })
-      })
-      changeBackground(movies[0])
-      changeColorFavoriteDesktop()
-      pageTop()
-
-    }
-
-
+      window.addEventListener('resize', handleWindowResize);
+      handleWindowResize();
+    })();
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
+
 
 function searchInput() {
   const inputSearch = document.querySelector('#search')
