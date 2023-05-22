@@ -204,6 +204,7 @@ async function loadMovies(apiUrl) {
         // console.log('tela menor, tela como tamanho = ', window.innerWidth)
         clearGrid()
         clearSwiper()
+        loadSwiper()
 
         const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || []
 
@@ -313,23 +314,6 @@ function loadMoviesGenres() {
 
 loadMoviesGenres()
 
-// function changeColorFavorite() {
-//   const icone = document.querySelectorAll('.swiper-slide .content-slide > i')
-//   icone.forEach(i => {
-//     i.addEventListener('click', () => {
-//       i.classList.toggle('active')
-//     })
-//   })
-// }
-// function changeColorFavoriteDesktop() {
-//   const icone = document.querySelectorAll('.wrapper-movie > i')
-//   icone.forEach(i => {
-//     i.addEventListener('click', () => {
-//       i.classList.toggle('active')
-//     })
-//   })
-// }
-
 
 function changeBackground(movie) {
 
@@ -357,103 +341,104 @@ async function searchMovieApi(api) {
     const data = await response.json();
     const movies = data.results;
 
-    (function () {
-      function handleWindowResize() {
-        // Caso telas maiores que 1024px não terá swiper e o resultado será mostrado via grid
-        if (window.innerWidth >= 1024) {
-          clearSwiper();
-          clearGrid();
 
-          const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
+    function handleWindowResize() {
+      // Caso telas maiores que 1024px não terá swiper e o resultado será mostrado via grid
+      if (window.innerWidth >= 1024) {
+        clearSwiper()
+        clearGrid()
 
-          movies.forEach((movie, index) => {
-            if (movie.poster_path) {
-              createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`);
+        const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
+
+        movies.forEach((movie, index) => {
+          if (movie.poster_path) {
+            createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`);
+          }
+
+          const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index];
+          wrapperMovie.addEventListener('click', () => {
+            changeBackground(movie);
+          });
+
+          const favourite = document.querySelectorAll('.wrapper-movie > i')[index];
+
+          if (savedMovieIds.includes(movie.id)) {
+            favourite.classList.add('active');
+          }
+
+          favourite.addEventListener('click', () => {
+            const movieId = movie.id;
+            favourite.classList.toggle('active');
+
+            // Verifique se o filme está nos favoritos após o toggle
+            if (favourite.classList.contains('active')) {
+              addToFavoritesLocalStorage(movieId);
+            } else {
+              removeFromFavoritesLocalStorage(movieId);
             }
+          });
+        });
 
-            const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index];
-            wrapperMovie.addEventListener('click', () => {
-              changeBackground(movie);
+        changeBackground(movies[0]);
+        //changeColorFavoriteDesktop();
+        pageTop();
+      } else {
+        clearGrid()
+        clearSwiper()
+        loadSwiper()
+
+        const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
+
+        const slides = [];
+
+        movies.forEach((movie, index) => {
+          if (movie.backdrop_path) {
+            criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`);
+            const slide = document.querySelectorAll('.swiper-slide')[index];
+            slides.push(slide);
+          }
+        });
+
+        slides.forEach((slide, index) => {
+          if (slide) {
+            slide.addEventListener('click', () => {
+              changeBackground(movies[index])
             });
+          }
+        });
 
-            const favourite = document.querySelectorAll('.wrapper-movie > i')[index];
+        const favourites = document.querySelectorAll('.content-slide > i');
 
-            if (savedMovieIds.includes(movie.id)) {
-              favourite.classList.add('active');
+        favourites.forEach((favourite, index) => {
+          // Verifique se o filme está nos favoritos e adicione a classe 'active' se necessário
+          if (savedMovieIds.includes(movies[index].id)) {
+            favourite.classList.add('active');
+          }
+
+          favourite.addEventListener('click', () => {
+            const movieId = movies[index].id;
+
+            // Adicione ou remova a classe 'active' ao clicar no ícone de favoritos
+            favourite.classList.toggle('active');
+
+            // Verifique se o filme está nos favoritos após o toggle
+            if (favourite.classList.contains('active')) {
+              addToFavoritesLocalStorage(movieId);
+            } else {
+              removeFromFavoritesLocalStorage(movieId)
             }
+          })
+        })
 
-            favourite.addEventListener('click', () => {
-              const movieId = movie.id;
-              favourite.classList.toggle('active');
-
-              // Verifique se o filme está nos favoritos após o toggle
-              if (favourite.classList.contains('active')) {
-                addToFavoritesLocalStorage(movieId);
-              } else {
-                removeFromFavoritesLocalStorage(movieId);
-              }
-            });
-          });
-
-          changeBackground(movies[0]);
-          //changeColorFavoriteDesktop();
-          pageTop();
-        } else {
-          clearGrid();
-          clearSwiper();
-
-          const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
-
-          const slides = [];
-
-          movies.forEach((movie, index) => {
-            if (movie.backdrop_path) {
-              criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`);
-              const slide = document.querySelectorAll('.swiper-slide')[index];
-              slides.push(slide);
-            }
-          });
-
-          slides.forEach((slide, index) => {
-            if (slide) {
-              slide.addEventListener('click', () => {
-                changeBackground(movies[index]);
-              });
-            }
-          });
-
-          const favourites = document.querySelectorAll('.content-slide > i');
-
-          favourites.forEach((favourite, index) => {
-            // Verifique se o filme está nos favoritos e adicione a classe 'active' se necessário
-            if (savedMovieIds.includes(movies[index].id)) {
-              favourite.classList.add('active');
-            }
-
-            favourite.addEventListener('click', () => {
-              const movieId = movies[index].id;
-
-              // Adicione ou remova a classe 'active' ao clicar no ícone de favoritos
-              favourite.classList.toggle('active');
-
-              // Verifique se o filme está nos favoritos após o toggle
-              if (favourite.classList.contains('active')) {
-                addToFavoritesLocalStorage(movieId);
-              } else {
-                removeFromFavoritesLocalStorage(movieId);
-              }
-            });
-          });
-
-          changeBackground(movies[0]);
-        }
+        changeBackground(movies[0])
       }
+    }
 
-      window.addEventListener('resize', handleWindowResize);
-      handleWindowResize();
-    })();
+    window.addEventListener('resize', handleWindowResize)
+    handleWindowResize();
+
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
