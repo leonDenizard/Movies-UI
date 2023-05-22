@@ -137,12 +137,6 @@ const key = 'fd298ef799ed7bc469fd73887cdfcc2e'
 function getGenresID(link) {
   return link.getAttribute('id')
 }
-const page = 1;
-
-function buildApiUrl(genreID) {
-  return `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc&with_genres=${genreID}&page=${page}`
-}
-
 
 async function loadMovies(apiUrl) {
   try {
@@ -290,29 +284,63 @@ function removeFromFavoritesLocalStorage(movieId) {
 
 
 
+let page = 1;
+
+function nextPage() {
+  const next = document.getElementById('next');
+  const pageNumber = document.querySelector('.number');
+
+  next.addEventListener('click', async () => {
+    page++;
+    console.log(page);
+    pageNumber.textContent = page;
+
+    const activeLink = document.querySelector('header ul li > a.active');
+
+    if (activeLink) {
+      const genreID = getGenresID(activeLink);
+      const apiUrl = buildApiUrl(genreID);
+      await loadMovies(apiUrl);
+      swiper.slideTo(0);
+    }
+  });
+}
+
+function buildApiUrl(genreID) {
+  return `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc&with_genres=${genreID}&page=${page}`;
+}
 
 function loadMoviesGenres() {
-  const linkGenres = document.querySelectorAll('header ul li > a')
+  nextPage();
+
+  const linkGenres = document.querySelectorAll('header ul li > a');
 
   linkGenres.forEach(link => {
-    link.addEventListener('click', async event => {
+    link.addEventListener('click', async () => {
+      linkGenres.forEach(link => link.classList.remove('active'));
+      link.classList.add('active');
 
-      const genreID = getGenresID(link)
-      const apiUrl = buildApiUrl(genreID)
+      page = 1
+      const pageNumber = document.querySelector('.number');
+      pageNumber.textContent = page
 
-      await loadMovies(apiUrl)
+      const genreID = getGenresID(link);
+      const apiUrl = buildApiUrl(genreID);
+
+      await loadMovies(apiUrl);
       swiper.slideTo(0);
 
-      headerMenu.classList.remove('active')
-      btnMenu.classList.remove('active')
-    })
+      headerMenu.classList.remove('active');
+      btnMenu.classList.remove('active');
+    });
+  });
 
-
-  })
   linkGenres[0].click();
 }
 
-loadMoviesGenres()
+loadMoviesGenres();
+
+
 
 
 function changeBackground(movie) {
@@ -490,5 +518,3 @@ function pageTop() {
   })
 
 }
-
-
