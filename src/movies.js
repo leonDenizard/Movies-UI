@@ -244,7 +244,7 @@ async function loadMovies(apiUrl) {
     // Adicione o evento de redimensionamento da janela
     window.addEventListener('resize', handleWindowResize)
 
-    // Chame a função pela primeira vez
+    // Chama a função pela primeira vez
     handleWindowResize()
 
 
@@ -292,27 +292,62 @@ function nextPage() {
 
   next.addEventListener('click', async () => {
     page++;
-    console.log(page);
     pageNumber.textContent = page;
 
     const activeLink = document.querySelector('header ul li > a.active');
 
     if (activeLink) {
       const genreID = getGenresID(activeLink);
-      const apiUrl = buildApiUrl(genreID);
+      const apiUrl = buildApiUrl(genreID, page);
       await loadMovies(apiUrl);
       swiper.slideTo(0);
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
     }
+
+    
   });
+  
 }
 
-function buildApiUrl(genreID) {
+function previousPage() {
+  const previous = document.getElementById('previous')
+  const pageNumber = document.querySelector('.number')
+  
+  previous.addEventListener('click', async () =>{
+    if(page > 1){
+      page--
+
+      pageNumber.textContent = page
+
+      const activeLink = document.querySelector('header ul li > a.active');
+
+      if (activeLink) {
+        const genreID = getGenresID(activeLink);
+        const apiUrl = buildApiUrl(genreID, page);
+        await loadMovies(apiUrl);
+        swiper.slideTo(0);
+
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        })
+      }
+  
+    }
+  })
+}
+
+function buildApiUrl(genreID, page) {
   return `https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=pt-BR&sort_by=popularity.desc&with_genres=${genreID}&page=${page}`;
 }
 
 function loadMoviesGenres() {
   nextPage();
-
+  previousPage()
   const linkGenres = document.querySelectorAll('header ul li > a');
 
   linkGenres.forEach(link => {
@@ -332,6 +367,9 @@ function loadMoviesGenres() {
 
       headerMenu.classList.remove('active');
       btnMenu.classList.remove('active');
+
+      const footer = document.querySelector('footer')
+      footer.style.display = 'block'
     });
   });
 
@@ -358,8 +396,6 @@ function changeBackground(movie) {
 function buildQueryApi(query) {
 
   const queryFormatade = query.toLowerCase().replace(/\s+/g, '+')
-
-
   return `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${queryFormatade}&language=pt-BR`
 }
 
@@ -479,17 +515,19 @@ function searchInput() {
     event.preventDefault()
     const query = inputSearch.value
     const api = buildQueryApi(query)
-
+    
     searchMovieApi(api)
     swiper.slideTo(0);
     inputSearch.blur()
 
     inputSearch.value = ""
 
+    const footer = document.querySelector('footer')
+    footer.style.display = 'none'
 
   })
 
-
+  
 }
 
 searchInput()
