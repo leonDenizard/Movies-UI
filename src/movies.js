@@ -22,21 +22,27 @@ listLinks[0].classList.add("active");
 
 
 
-let swiper = document.querySelector('.swiper')
+let swiper = null;
+
 function loadSwiper() {
-  swiper = new Swiper(".swiper", {
-    slidesPerView: 2,
-    spaceBetween: 20,
-    centeredSlides: true,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-
-  })
-
+  if (!swiper) {
+    swiper = new Swiper(".swiper", {
+      slidesPerView: 2,
+      spaceBetween: 20,
+      centeredSlides: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  } else {
+    swiper.params.spaceBetween = 20 // Define o espaço entre os slides
+    swiper.update(); // Atualiza o Swiper existente
+  }
 }
-loadSwiper();
+
+loadSwiper()
+
 
 
 function criaSwiperSlideImg(src, titulo) {
@@ -146,7 +152,7 @@ async function loadMovies(apiUrl) {
 
     const movies = data.results;
 
-
+    loadDiv.style.display = 'none';
 
     // Caso telas maiores que 1024px não terá swiper e op resultado será mostrado via grid
     function handleWindowResize() {
@@ -193,6 +199,10 @@ async function loadMovies(apiUrl) {
         // changeColorFavoriteDesktop()
         pageTop()
         // localStorage.clear();
+        const footer = document.querySelector('footer')
+        footer.style.display = 'block'
+
+
       } else {
 
         // console.log('tela menor, tela como tamanho = ', window.innerWidth)
@@ -237,7 +247,8 @@ async function loadMovies(apiUrl) {
         })
 
         changeBackground(movies[0])
-
+        const footer = document.querySelector('footer')
+        footer.style.display = 'none'
       }
     }
 
@@ -346,7 +357,7 @@ function buildApiUrl(genreID, page) {
 }
 
 function loadMoviesGenres() {
-  nextPage();
+  nextPage()
   previousPage()
   const linkGenres = document.querySelectorAll('header ul li > a');
 
@@ -363,13 +374,11 @@ function loadMoviesGenres() {
       const apiUrl = buildApiUrl(genreID);
 
       await loadMovies(apiUrl);
+      loadSwiper()
       swiper.slideTo(0);
 
       headerMenu.classList.remove('active');
       btnMenu.classList.remove('active');
-
-      const footer = document.querySelector('footer')
-      footer.style.display = 'block'
     });
   });
 
@@ -449,7 +458,7 @@ async function searchMovieApi(api) {
       } else {
         clearGrid()
         clearSwiper()
-        loadSwiper()
+        // loadSwiper()
 
         const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
 
@@ -556,3 +565,6 @@ function pageTop() {
   })
 
 }
+
+const loadDiv = document.getElementById('load');
+window.addEventListener('load', loadMovies);
