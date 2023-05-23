@@ -226,7 +226,6 @@ async function loadMovies(){
     const response = await fetch(api)
     const data = await response.json()
     const movies = data.results
-    console.log(movies)
     
     // Criando os slides do Swiper
     movies.forEach(movie => {

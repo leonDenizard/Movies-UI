@@ -1,15 +1,16 @@
 const btnMenu = document.querySelector(".container-icon");
 const headerMenu = document.querySelector(".container-menu");
 
-
+// Função responsável por abrir e fechar o menu
 function toggleMenu() {
   btnMenu.classList.toggle("active");
   headerMenu.classList.toggle("active");
 }
 btnMenu.addEventListener("click", toggleMenu);
 
-const listLinks = document.querySelectorAll(".container-menu > ul > li");
 
+const listLinks = document.querySelectorAll(".container-menu > ul > li");
+//Percorre todos links do menu e remove a classe active primeiro e depois aplica a classe no link clicado
 listLinks.forEach((link) => {
   link.addEventListener("click", () => {
     listLinks.forEach((efeito) => efeito.classList.remove("active"));
@@ -17,15 +18,20 @@ listLinks.forEach((link) => {
     link.classList.add("active");
   });
 });
+//Deixa o link movies como ativo
 listLinks[0].classList.add("active");
 
 
 
 
+// Declaração da variável swiper, inicialmente como nula
 let swiper = null;
 
+// Função para carregar o Swiper
 function loadSwiper() {
+  // Verifica se o Swiper já foi inicializado
   if (!swiper) {
+    // Inicializa o Swiper com as configurações desejadas
     swiper = new Swiper(".swiper", {
       slidesPerView: 2,
       spaceBetween: 20,
@@ -36,12 +42,15 @@ function loadSwiper() {
       },
     });
   } else {
-    swiper.params.spaceBetween = 20 // Define o espaço entre os slides
+    // Caso o Swiper já tenha sido inicializado, atualiza as configurações existentes
+    swiper.params.spaceBetween = 20; // Define o espaço entre os slides
     swiper.update(); // Atualiza o Swiper existente
   }
 }
 
-loadSwiper()
+// Chama a função para carregar o Swiper
+loadSwiper();
+
 
 
 
@@ -140,6 +149,8 @@ function clearGrid() {
 
 const key = 'fd298ef799ed7bc469fd73887cdfcc2e'
 
+
+//Função recebe um link e retorna o id desse link
 function getGenresID(link) {
   return link.getAttribute('id')
 }
@@ -149,6 +160,7 @@ async function loadMovies(apiUrl) {
 
     const response = await fetch(apiUrl)
     const data = await response.json()
+    
 
     const movies = data.results;
 
@@ -163,8 +175,15 @@ async function loadMovies(apiUrl) {
 
         const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || []
 
+        
         movies.forEach((movie, index) => {
-          createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+
+          if(movie.poster_path){
+            createGrid(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+
+
+          }
+          
 
           const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
           wrapperMovie.addEventListener('click', () => {
@@ -205,7 +224,7 @@ async function loadMovies(apiUrl) {
 
       } else {
 
-        // console.log('tela menor, tela como tamanho = ', window.innerWidth)
+        // console.log('tela menoe que 1024')
         clearGrid()
         clearSwiper()
         loadSwiper()
@@ -213,8 +232,11 @@ async function loadMovies(apiUrl) {
         const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || []
 
         movies.forEach((movie, index) => {
+          if(movie.poster_path){
+            criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+          }
 
-          criaSwiperSlideImg(`https://image.tmdb.org/t/p/w500${movie.poster_path}`, `${movie.title}`)
+          
 
           //Criado vinculo entre o slide criado com o index do filme na api para poder carregar os dados pelo click
           const slide = document.querySelectorAll('.swiper-slide')[index]
@@ -347,7 +369,6 @@ function previousPage() {
           behavior: 'smooth'
         })
       }
-  
     }
   })
 }
