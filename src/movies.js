@@ -479,7 +479,7 @@ async function searchMovieApi(api) {
       } else {
         clearGrid()
         clearSwiper()
-        // loadSwiper()
+        loadSwiper()
 
         const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || [];
 
@@ -529,7 +529,8 @@ async function searchMovieApi(api) {
     }
 
     window.addEventListener('resize', handleWindowResize)
-    handleWindowResize();
+    handleWindowResize()
+    loadSwiper()
 
   } catch (error) {
     console.log(error)
