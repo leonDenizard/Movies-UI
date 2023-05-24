@@ -548,11 +548,11 @@ function searchInput() {
     const api = buildQueryApi(query)
     
     searchMovieApi(api)
-    swiper.slideTo(0);
+    swiper.slideTo(0)
     inputSearch.blur()
 
     inputSearch.value = ""
-
+    
     const footer = document.querySelector('footer')
     footer.style.display = 'none'
 

@@ -144,7 +144,7 @@ function createClearFavourites(){
     containerFavourite.appendChild(divClearFavourite)
 
     const pText = document.createElement('p')
-    pText.textContent = 'Ops parece que você não tem favoritos'
+    pText.textContent = 'Ops! parece que você não tem favoritos'
     divClearFavourite.appendChild(pText)
 
     const i = document.createElement('i')

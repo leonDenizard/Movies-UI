@@ -173,6 +173,22 @@
     max-width: 70%;
     margin: 300px auto 80px;
   }
+  .clear-favourite{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 0.5em;
+  }
+  .clear-favourite > p{
+    font-size: 1.5em;
+    display: inline-block;
+  }
+  .clear-favourite > i{
+    font-size: 2.5em;
+    color: rgba(255, 255, 255, 0.4);    
+  }
   .wrapper-movie{
     position: relative;
     width: 100%;
