@@ -1,5 +1,6 @@
 const favourites = localStorage.getItem("movieIds")
 const cleanFavourites = favourites.slice(1, -1)
+
 const ids = cleanFavourites.split(",");
 
 const key = "fd298ef799ed7bc469fd73887cdfcc2e";
@@ -69,33 +70,48 @@ async function loadFavourites() {
        const response = await fetch(api)
        const movie = await response.json()
 
-       movies.push(movie)
+       if (response.ok) {
+            movies.push(movie);
+        } else {
+            console.log(`Erro ao obter o filme com ID ${id}: ${movie.status_message}`);
+        }
+    }
+    
+    if(movies.length === 0){
+        createClearFavourites()
+    }else{
+        movies.forEach((movie, index) =>{
+            createGrid(movie.poster_path, movie.vote_average, movie.title)
+    
+            const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
+            wrapperMovie.addEventListener('click', () => {
+              changeBackground(movie)
+            })   
+            
+            const favourite = document.querySelectorAll('.wrapper-movie > i.active')[index]
+            favourite.addEventListener('click', ()=>{
+                
+                const movieId = movie.id
+    
+                removeFromFavoritesLocalStorage(movieId)
+                favourite.classList.remove('active')
+    
+                wrapperMovie.remove()
+
+                const containerFavourite = document.querySelector('.container-favourite')
+                if (containerFavourite.childElementCount === 0) {
+                    createClearFavourites()
+                  }
+               
+            })
+            
+        })
+        changeBackground(movies[0])
+
     }
 
 
-    movies.forEach((movie, index) =>{
-        createGrid(movie.poster_path, movie.vote_average, movie.title)
-
-        const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
-        wrapperMovie.addEventListener('click', () => {
-          changeBackground(movie)
-        })   
-        
-        const favourite = document.querySelectorAll('.wrapper-movie > i.active')[index]
-        favourite.addEventListener('click', ()=>{
-            
-            const movieId = movie.id
-
-            removeFromFavoritesLocalStorage(movieId)
-            favourite.classList.remove('active')
-
-            wrapperMovie.remove()
-
-           
-        })
-        
-    })
-    changeBackground(movies[0])
+    
 
 
 
@@ -119,3 +135,21 @@ function removeFromFavoritesLocalStorage(movieId){
     localStorage.setItem('movieIds', JSON.stringify(savedMovieIds))
 }
 
+function createClearFavourites(){
+
+    const containerFavourite = document.querySelector('.container-favourite')
+
+    const divClearFavourite = document.createElement('div')
+    divClearFavourite.classList.add('clear-favourite')
+    containerFavourite.appendChild(divClearFavourite)
+
+    const pText = document.createElement('p')
+    pText.textContent = 'Ops parece que você não tem favoritos'
+    divClearFavourite.appendChild(pText)
+
+    const i = document.createElement('i')
+    i.classList.add('ph')
+    i.classList.add('ph-heart-break')
+    divClearFavourite.appendChild(i)
+    
+}
