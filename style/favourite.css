@@ -117,19 +117,26 @@
     position: fixed;
     width: 100%;
     z-index: 1;
-
-    
   }
-  /* section.container-movie::before{
+  section.container-movie::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 4px;
+    width: 100%;
+    height: 2px;
+    background-image: linear-gradient(to left, transparent, rgba(255,255,255,1), transparent);
+  }
+  section.container-movie::before{
     content: '';
     position: absolute;
     top: 0;
     width: 100%;
     height: 260px;
     background-color: #0a0908;
-    -webkit-mask-image: linear-gradient(to top, transparent, #0a0908 10%);
+    -webkit-mask-image: linear-gradient(to top, transparent, #0a0908 30%);
     
-  } */
+  }
   .player{
     position: relative;
     width: 100%;
@@ -148,7 +155,7 @@
     width: 4rem;
     border-radius: 50%;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.1);
 
     display: flex;
     justify-content: center;
@@ -162,14 +169,16 @@
     position: relative;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
-    max-width: 85%;
+    gap: 3rem;
+    max-width: 70%;
     margin: 300px auto 80px;
-    /* -webkit-mask-image: linear-gradient(to bottom, transparent, #0a0908); */
   }
   .wrapper-movie{
     position: relative;
     width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.08);
   }
   .wrapper-movie > img{
     max-width: 100%;
@@ -178,12 +187,58 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 1.6em;
+    font-size: 1.8em;
+  }
+  .wrapper-movie > i.active{
+    color: red;
+      animation-name: heart-beat;
+      animation-duration: 0.2s;
+      animation-fill-mode: forwards;
+  }
+  @keyframes heart-beat {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.6)
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    75%{
+      transform: scale(1.2)
+    }
+    100% {
+      transform: scale(1);
+    }
   }
   .wrapper-movie .detail{
     position: absolute;
-    bottom: 1rem;
-    left: 1rem;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
   }
+  .imdb p{
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .title-movie p{
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 1.2em;
+    line-height: 100%;
+    background-image: linear-gradient(to right, #d644ff, #ff0095, #ff651a, #e6b800);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
   
 }

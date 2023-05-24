@@ -25,6 +25,7 @@ function createGrid(src, imdb, title){
     i.classList.add('fa-sharp')
     i.classList.add('fa-solid')
     i.classList.add('fa-heart')
+    i.classList.add('active')
     wrapperMovie.appendChild(i)
 
     const divDetail = document.createElement('div')
@@ -36,7 +37,7 @@ function createGrid(src, imdb, title){
     divDetail.appendChild(divImdb)
 
     const pImdb = document.createElement('p')
-    pImdb.textContent = imdb.toFixed(2)
+    pImdb.textContent = `${imdb.toFixed(2)} IMDB`
     divImdb.appendChild(pImdb)
 
     const divTitleMovie = document.createElement('div')
@@ -72,15 +73,27 @@ async function loadFavourites() {
     }
 
 
-    console.log(movies)
-
     movies.forEach((movie, index) =>{
         createGrid(movie.poster_path, movie.vote_average, movie.title)
 
         const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
         wrapperMovie.addEventListener('click', () => {
           changeBackground(movie)
-        })        
+        })   
+        
+        const favourite = document.querySelectorAll('.wrapper-movie > i.active')[index]
+        favourite.addEventListener('click', ()=>{
+            
+            const movieId = movie.id
+
+            removeFromFavoritesLocalStorage(movieId)
+            favourite.classList.remove('active')
+
+            wrapperMovie.remove()
+
+           
+        })
+        
     })
     changeBackground(movies[0])
 
@@ -91,3 +104,18 @@ async function loadFavourites() {
   }
 }
 loadFavourites();
+
+function removeFromFavoritesLocalStorage(movieId){
+    //Verifica se já existem IDs de filmes no localStorage
+    const savedMovieIds = JSON.parse(localStorage.getItem('movieIds')) || []
+
+    //verifica se o ID do filme está presente na lista de favoritos
+    const index = savedMovieIds.indexOf(movieId)
+    if (index > -1){
+        savedMovieIds.splice(index, 1)
+    }
+
+    //Salva a lista atualizada de IDs de filme no localStorage
+    localStorage.setItem('movieIds', JSON.stringify(savedMovieIds))
+}
+
