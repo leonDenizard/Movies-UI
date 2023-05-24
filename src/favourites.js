@@ -49,6 +49,15 @@ function createGrid(src, imdb, title){
 
 }
 
+function changeBackground(movie) {
+
+   const imgBackground = document.querySelector('#background')
+   if (movie.backdrop_path) {
+    imgBackground.src = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
+   }
+  
+}
+
 async function loadFavourites() {
   try {
 
@@ -65,9 +74,15 @@ async function loadFavourites() {
 
     console.log(movies)
 
-    movies.forEach(movie =>{
+    movies.forEach((movie, index) =>{
         createGrid(movie.poster_path, movie.vote_average, movie.title)
+
+        const wrapperMovie = document.querySelectorAll('.wrapper-movie')[index]
+        wrapperMovie.addEventListener('click', () => {
+          changeBackground(movie)
+        })        
     })
+    changeBackground(movies[0])
 
 
 
