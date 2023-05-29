@@ -1430,6 +1430,13 @@
     opacity: 1;
     font-weight: 600;
   }
+  .container-movies .container-data{
+    height: 400px;
+  }
+  .container-cast{
+    height: 250px;
+    width: 40%;
+  }
   .container-data{
     transition: all 1s ease;
   }
