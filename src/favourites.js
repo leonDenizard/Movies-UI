@@ -156,4 +156,3 @@ function createClearFavourites(){
     
 }
 const loadDiv = document.getElementById('load');
-window.addEventListener('load', loadFavourites);
