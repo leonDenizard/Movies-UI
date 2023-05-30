@@ -156,4 +156,4 @@ function createClearFavourites(){
     
 }
 const loadDiv = document.getElementById('load');
-window.addEventListener('load', loadMovies);
+window.addEventListener('load', loadFavourites);
