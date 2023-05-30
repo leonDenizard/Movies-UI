@@ -76,6 +76,8 @@ async function loadFavourites() {
             console.log(`Erro ao obter o filme com ID ${id}: ${movie.status_message}`);
         }
     }
+
+    loadDiv.style.display = 'none';
     
     if(movies.length === 0){
         createClearFavourites()
@@ -153,3 +155,5 @@ function createClearFavourites(){
     divClearFavourite.appendChild(i)
     
 }
+const loadDiv = document.getElementById('load');
+window.addEventListener('load', loadMovies);
