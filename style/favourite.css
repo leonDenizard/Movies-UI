@@ -769,3 +769,23 @@
   }
 
 }
+
+@media(min-width: 1536px){
+  section.container-movie{
+    width: calc(100% - 16rem);
+  }
+  section.container-movie::before{
+    height: 20rem;   
+  }
+  .player{
+    height: 20rem;
+  }
+  .player > img{
+    max-height: 20rem;  
+    height: 20rem;
+  }
+  section.container-favourite{
+    grid-template-columns: repeat(6,1fr);
+    margin: 22rem auto 80px;
+  }
+}
