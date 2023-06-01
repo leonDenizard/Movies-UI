@@ -61,6 +61,8 @@ async function loadSerie(api){
         if(wrapperSerie){
             wrapperSerie.addEventListener('click', ()=>{
                 console.log(serie.id)
+                loadEpisode(serie.id)
+
            })
         }
         
@@ -109,3 +111,41 @@ function formateDate(date){
     return dateFormatade
 }
 
+async function loadEpisode(id){
+    const url = `https://api.themoviedb.org/3/tv/${id}/season/1?api_key=${key}&language=pt-BR`
+
+    const response = await fetch(url)
+    const data = await response.json()
+    const episodes = data.episodes
+
+    //console.log(episodes)
+
+    episodes.forEach(episode=>{
+        createEpisode(episode.still_path, episode.episode_number, episode.name)
+    })
+
+}
+
+function createEpisode(src, number_episode, title){
+
+    const serie = document.querySelector('.serie')
+
+    const wrapperEpisode = document.createElement('div')
+    wrapperEpisode.className = 'wrapper-episode'
+    serie.appendChild(wrapperEpisode)
+
+    const img = document.createElement('img')
+    img.className = 'img-episode'
+    img.src = `${imgPath}${src}`
+    wrapperEpisode.appendChild(img)
+
+    const pNumberEpisode = document.createElement('p')
+    pNumberEpisode.className = 'number-episode'
+    pNumberEpisode.textContent = `Episódio: ${number_episode}`
+    wrapperEpisode.appendChild(pNumberEpisode)
+
+    const titleEpisode = document.createElement('p')
+    titleEpisode.className = 'title-episode'
+    titleEpisode.textContent = title
+    wrapperEpisode.appendChild(titleEpisode)
+}
