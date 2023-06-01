@@ -1,8 +1,6 @@
 const inputSearch = document.querySelector('#search')
 const formInput = document.querySelector('#form-search')
 
-const imgBackground = document.querySelector('#background')
-
 const key = 'fd298ef799ed7bc469fd73887cdfcc2e'
 const imgPath = 'https://image.tmdb.org/t/p/w500'
 
@@ -20,12 +18,27 @@ function searchSerie(){
         
         const query = inputSearch.value
         const api = buildQueryApi(query)
-
+        
         loadSerie(api)
+
+        inputSearch.blur()
+        inputSearch.value = ""
+
+        
     })
 }
 
 searchSerie()
+
+function clearSeries(){
+    const containerSerie = document.querySelectorAll('.serie')
+    if(containerSerie){
+        containerSerie.forEach(serie =>{
+            serie.remove()
+        })
+    }
+    
+}
 
 async function loadSerie(api){
 
@@ -34,7 +47,7 @@ async function loadSerie(api){
 
     const series = data.results
     // console.log(series[0])
-
+    clearSeries()
     series.forEach(serie =>{
         
         createSerie(serie.poster_path, serie.name, serie.origin_country, serie.first_air_date, serie.id)
