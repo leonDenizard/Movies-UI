@@ -58,7 +58,6 @@ async function loadSerie(api){
 
             //Após criação das series, combina o index da serie criada na DOM com index da serie na API
             const wrapperSerie = document.querySelectorAll('.serie')[index]
-            console.log(wrapperSerie, serie.name,index)
             //Valida que existe um elemento criado para depois adicionar o listener
             if(wrapperSerie){
                 
@@ -70,7 +69,7 @@ async function loadSerie(api){
                     }
 
                     wrapperSerie.classList.toggle('active')
-                  })
+                })
             }
         }
         
@@ -169,4 +168,14 @@ function createEpisode(src, number_episode, title, parentElement){
     titleEpisode.className = 'title-episode'
     titleEpisode.textContent = title
     wrapperEpisode.appendChild(titleEpisode)
+
+
+    // Após criar os episódios dinamicamente é criado um listener para não remover os episodios se clicado em algum episódio
+    const episodes = document.querySelectorAll('.wrapper-episode');
+              
+    episodes.forEach((episode) => {
+        episode.addEventListener('click', (event) => {
+            event.stopPropagation()
+        })
+    })
 }
