@@ -51,22 +51,38 @@ async function loadSerie(api){
 
 
     series.forEach((serie, index) =>{
-        if(serie.poster_path && serie.first_air_date !== ''){
+        if(serie.poster_path && serie.first_air_date !== '' && serie.backdrop_path){
+
             createSerie(serie.poster_path, serie.name, serie.origin_country, serie.first_air_date)
+            // console.log(serie, serie.id)
+
+            //Após criação das series, combina o index da serie criada na DOM com index da serie na API
+            const wrapperSerie = document.querySelectorAll('.serie')[index]
+            console.log(wrapperSerie, serie.name,index)
+            //Valida que existe um elemento criado para depois adicionar o listener
+            if(wrapperSerie){
+                
+                wrapperSerie.addEventListener('click', () => {
+                    if (wrapperSerie.classList.contains('active')) {
+                        removeEpisodes(wrapperSerie)
+                    }else{
+                        loadEpisode(serie.id, wrapperSerie)
+                    }
+
+                    wrapperSerie.classList.toggle('active')
+                  })
+            }
         }
         
-        //Após criação das series, combina o index da serie criada na DOM com index da serie na API
-        const wrapperSerie = document.querySelectorAll('.serie')[index]
-        //Valida que existe um elemento criado para depois adicionar o listener
-        if(wrapperSerie){
-            wrapperSerie.addEventListener('click', ()=>{
-                console.log(serie.id)
-                loadEpisode(serie.id)
-
-           })
-        }
         
     })
+
+    function removeEpisodes(wrapperSerie) {
+        const episodes = wrapperSerie.querySelectorAll('.wrapper-episode');
+        episodes.forEach((episode) => {
+          episode.remove();
+        });
+    }
     
 }
 
@@ -111,7 +127,7 @@ function formateDate(date){
     return dateFormatade
 }
 
-async function loadEpisode(id){
+async function loadEpisode(id, parentElement){
     const url = `https://api.themoviedb.org/3/tv/${id}/season/1?api_key=${key}&language=pt-BR`
 
     const response = await fetch(url)
@@ -121,18 +137,23 @@ async function loadEpisode(id){
     //console.log(episodes)
 
     episodes.forEach(episode=>{
-        createEpisode(episode.still_path, episode.episode_number, episode.name)
+        if(episode.still_path){
+            createEpisode(episode.still_path, episode.episode_number, episode.name, parentElement)
+        }else{
+            console.log('não possui episodios cadastrado')
+        }
+        
     })
 
 }
 
-function createEpisode(src, number_episode, title){
+function createEpisode(src, number_episode, title, parentElement){
 
-    const serie = document.querySelector('.serie')
+    
 
     const wrapperEpisode = document.createElement('div')
     wrapperEpisode.className = 'wrapper-episode'
-    serie.appendChild(wrapperEpisode)
+    parentElement.appendChild(wrapperEpisode)
 
     const img = document.createElement('img')
     img.className = 'img-episode'
