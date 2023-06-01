@@ -48,13 +48,27 @@ async function loadSerie(api){
     const series = data.results
     // console.log(series[0])
     clearSeries()
-    series.forEach(serie =>{
+
+
+    series.forEach((serie, index) =>{
+        if(serie.poster_path && serie.first_air_date !== ''){
+            createSerie(serie.poster_path, serie.name, serie.origin_country, serie.first_air_date)
+        }
         
-        createSerie(serie.poster_path, serie.name, serie.origin_country, serie.first_air_date, serie.id)
+        //Após criação das series, combina o index da serie criada na DOM com index da serie na API
+        const wrapperSerie = document.querySelectorAll('.serie')[index]
+        //Valida que existe um elemento criado para depois adicionar o listener
+        if(wrapperSerie){
+            wrapperSerie.addEventListener('click', ()=>{
+                console.log(serie.id)
+           })
+        }
+        
     })
+    
 }
 
-function createSerie(src, nameSerie, originCountry, dateAir, idSerie){
+function createSerie(src, nameSerie, originCountry, dateAir){
 
     const containerSerie = document.querySelector('.container-serie')
 
@@ -85,8 +99,6 @@ function createSerie(src, nameSerie, originCountry, dateAir, idSerie){
     pDateAir.className = 'date-air'
     pDateAir.textContent = `Data de lançamento: ${formateDate(dateAir)}`
     divDetail.appendChild(pDateAir)
-
-    const indexSerie = idSerie
 
 }
 
