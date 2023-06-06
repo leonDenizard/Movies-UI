@@ -141,6 +141,8 @@ form button{
   cursor: pointer;
 }
 form button > i{
+  position: absolute;
+  right: 10px;
   font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.5);
 }
@@ -248,4 +250,56 @@ form button > i{
   -webkit-text-fill-color: transparent;
   font-weight: 500;
   letter-spacing: 1px;
+}
+
+@media(min-width: 600px){
+  .container-navigation > .list-link{
+    height: 4em;
+  }
+  .container-navigation > ul > li > a > i{
+    font-size: 2em;
+  }
+  form input{
+    height: 3rem;
+    border-radius: 50px;
+  }
+  form button > i{
+    top: 3px;
+    right: 20px;
+    font-size: 2em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .serie {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .serie > img{
+    position: relative;
+    max-width: 60%;
+  }
+
+  .serie .detail{
+    width: 60%;
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+/* Estilização episódios */
+  .wrapper-episode .img-episode{
+    max-height: 6.5rem;
+  }
+
+  .wrapper-episode .number-episode{
+    font-size: 1em;
+  }
+  .wrapper-episode .number-episode::first-letter{
+    font-size: 1.4em;
+  }
+  .wrapper-episode .title-episode{
+    font-size: 1em;
+  }
 }
