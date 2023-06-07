@@ -303,3 +303,7 @@ form button > i{
     font-size: 1em;
   }
 }
+
+@media(min-width: 800px){
+  
+} 
