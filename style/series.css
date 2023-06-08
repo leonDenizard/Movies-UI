@@ -102,12 +102,12 @@ body {
 .container-navigation .login {
   display: none;
 }
-.container-serie{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 2rem;
+
+/* Estilização do conteudo principal */
+
+main{
+  min-height: 100svh;
+  width: 100vw;
 }
 .wrapper-search{
   width: 100%;
@@ -115,55 +115,80 @@ body {
 .search{
   width: 100%;
 }
-form{
-  position: relative;
+#form-search{
   width: 100%;
-  padding: 1rem 0;
+  position: relative;
+  padding: 1em 0;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
-form input{
+input{
   position: relative;
   margin: 0 auto;
   width: 90%;
   height: 2.5rem;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 5px 15px;
+  padding: 5px 25px;
   border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.06);
   outline: none;
+  font-size: 1em;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.8);
 }
-form button{
+input::placeholder{
+  font-size: .9em;
+  text-align: center;
+  font-style: italic;
+}
+button{
+  position: absolute;
+  top: 25px;
+  right: 40px;
   border: none;
   background-color: transparent;
   position: absolute;
-  top: 23px;
-  right: 30px;
   cursor: pointer;
 }
-form button > i{
-  position: absolute;
-  right: 10px;
-  font-size: 1.5rem;
-  color: rgba(255, 255, 255, 0.5);
-}
 
-.serie{
+form button > i{
+  font-size: 1.5em;
+  color: rgba(255, 255, 255, 0.6);
+}
+/* Container onde estão todas as séries carregadas */
+.container-serie{
   position: relative;
-  width: 80%;
+  width: 85%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin: 2em auto 4em;
+  justify-content: center;
 }
-.serie:last-child{
-  margin-bottom: 6em;
+.wrapper-serie{
+  width: 100%;
 }
-.serie > img{
+.wrapper-serie .content-serie{
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.content-serie > img{
   max-width: 100%;
-  border-radius: 10px;
+  border-radius: 20px;
   mask-image: var(--backgound-img-degrade);
   -webkit-mask-image: var(--backgound-img-degrade);
   overflow: hidden;
   border: 1px solid #d644ff;
 }
 
-.serie .detail{
+.detail{
   position: absolute;
   bottom: 5px;
   left: 0;
@@ -192,9 +217,14 @@ form button > i{
   font-size: .8em;
 }
 
-.serie.active .detail{
+.wrapper-serie.active .detail{
   opacity: 0;
   transition: all .5s ease;
+}
+
+.container-episode{
+  position: relative;
+  max-width: 100%;
 }
 
 .wrapper-episode{
@@ -224,19 +254,21 @@ form button > i{
 .wrapper-episode::before{
   position: absolute;
   content: "";
-  top: -2px;
+  top: -1px;
   width: 90%;
   height: 1px;
-  background-image: linear-gradient(to left, transparent, rgba(255,255,255,0.6), transparent);
+  background-image: linear-gradient(to left, transparent, #ff0095, #ff651a, transparent);
   border-radius: 5px;
+  opacity: 0.9;
 }
 .wrapper-episode::after{
   position: absolute;
   content: "";
-  bottom: -2px;
+  bottom: -1px;
   width: 90%;
   height: 1px;
-  background-image: linear-gradient(to left, transparent, rgba(255,255,255,0.5), transparent);
+  background-image: linear-gradient(to left, transparent, #d644ff, #e6b800,transparent);
+  opacity: 0.9;
 }
 .wrapper-episode .img-episode{
   max-height: 4.5rem;
@@ -260,60 +292,5 @@ form button > i{
   -webkit-text-fill-color: transparent;
   font-weight: 500;
   letter-spacing: 1px;
+  opacity: 0.8;
 }
-
-@media(min-width: 600px){
-  .container-navigation > .list-link{
-    height: 4em;
-  }
-  .container-navigation > ul > li > a > i{
-    font-size: 2em;
-  }
-  form input{
-    height: 3rem;
-    border-radius: 50px;
-  }
-  form button > i{
-    top: 3px;
-    right: 20px;
-    font-size: 2em;
-    color: rgba(255, 255, 255, 0.5);
-  }
-  .serie {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  .serie > img{
-    position: relative;
-    max-width: 60%;
-  }
-
-  .serie .detail{
-    width: 60%;
-    left: 50%;
-    transform: translate(-50%);
-  }
-
-/* Estilização episódios */
-  .wrapper-episode .img-episode{
-    max-height: 6.5rem;
-  }
-
-  .wrapper-episode .number-episode{
-    font-size: 1em;
-  }
-  .wrapper-episode .number-episode::first-letter{
-    font-size: 1.4em;
-  }
-  .wrapper-episode .title-episode{
-    font-size: 1em;
-  }
-}
-
-@media(min-width: 800px){
-  
-} 
