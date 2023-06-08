@@ -64,7 +64,7 @@ async function loadSerie(api) {
 function removeEpisodes(wrapperSerie) {
   const containerEpisode = wrapperSerie.querySelector('.container-episode')
   if (containerEpisode) {
-    containerEpisode.remove()
+    containerEpisode.innerHTML = ''
   }
 }
 
@@ -142,7 +142,7 @@ function createEpisode(src, number_episode, title, wrapperSerie) {
   const containerEpisode = wrapperSerie.querySelector('.container-episode')
 
   const wrapperEpisode = document.createElement('div')
-  wrapperEpisode.className = 'wrapper-episode'
+  wrapperEpisode.className = 'wrapper-episode fade-in'
   containerEpisode.appendChild(wrapperEpisode)
 
   const img = document.createElement('img')
@@ -163,4 +163,8 @@ function createEpisode(src, number_episode, title, wrapperSerie) {
   wrapperEpisode.addEventListener('click', (event) => {
     event.stopPropagation()
   })
+
+  setTimeout(() => {
+    wrapperEpisode.classList.remove('fade-in');
+  }, 100);
 }

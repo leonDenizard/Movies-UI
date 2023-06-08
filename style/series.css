@@ -211,6 +211,16 @@ form button > i{
   padding: 1em;
   border-radius: 10px;
 }
+.wrapper-episode {
+  opacity: 1;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.wrapper-episode.fade-in {
+  opacity: 0;
+  transform: translateY(0);
+}
 .wrapper-episode::before{
   position: absolute;
   content: "";
