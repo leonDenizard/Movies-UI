@@ -442,3 +442,106 @@ form button > i {
     cursor: pointer;
   }
 }
+
+@media(min-width: 1024px){
+  .container-navigation{
+    position: fixed;
+    right: 0;
+    width: 30%;
+    z-index: 4;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    height: 100%;
+  }
+  .container-navigation{
+    position: fixed;
+    width: 16rem;
+    border-right: 2px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    height: 100%;
+  }
+  .container-navigation .title{
+    display: block;
+    border-bottom: 2px solid var(--border-color);
+    height: 6rem;
+    width: 100%;
+  }
+  .container-navigation .title h1{
+    font-size: 3rem;
+    font-family: 'inter';
+    letter-spacing: 5px;
+  }
+  .container-navigation * span{
+    display: block;
+  }
+
+  .container-navigation ul.list-link{
+    padding-top: 2rem;
+    position: static;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    border: none;
+    width: 100%;
+    gap: 1rem;
+    backdrop-filter: none;
+  }
+  .container-navigation > ul::before{
+    display: none;
+  }
+  .container-navigation > ul::after{
+    display: none;
+  }
+  .container-navigation ul > li.active::before{
+    content: '';
+    width: 8px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: #fff;
+    filter: drop-shadow(0 0 4rem #fff);
+    position: absolute;
+    left: 10px;
+  }
+  .container-navigation ul > li a{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+ 
+  .container-navigation ul > li a i{
+    font-size: 2.1rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .container-navigation ul > li a span{
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .container-navigation > ul > li > a > i{
+    font-size: 2.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  main{
+    margin: 0 0 0 16rem;
+    max-width: calc(100% - 16rem);
+  }
+
+  button {
+    right: 70px;
+  }
+}
+
+@media(min-width: 1536px){
+  button {
+    right: 100px;
+  }
+}
