@@ -368,6 +368,7 @@ form button > i {
     position: relative;
     width: 90%;
     height: 100%;
+    gap: 4em;
   }
 
   .wrapper-serie {
@@ -380,6 +381,7 @@ form button > i {
 
   .wrapper-serie .content-serie {
     max-width: 260px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -398,7 +400,7 @@ form button > i {
 
   .container-episode {
     position: relative;
-    max-width: 100%;
+    width: 100%;
     max-height: 400px;
     overflow-y: scroll;
     -webkit-mask-image: var(--backgound-img-degrade);
@@ -415,6 +417,9 @@ form button > i {
   .wrapper-episode.fade-in {
     opacity: 0;
     transform: translateX(0);
+  }
+  .wrapper-episode .title-episode {
+    opacity: 1;
   }
 
   .container-episode::-webkit-scrollbar {
