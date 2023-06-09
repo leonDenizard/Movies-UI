@@ -10,6 +10,9 @@ function buildQueryApi(query) {
   return `https://api.themoviedb.org/3/search/tv?api_key=${key}&query=${queryFormatade}&language=pt-BR`
 }
 
+const loadApi = `https://api.themoviedb.org/3/discover/tv?api_key=${key}&sort_by=popularity.desc&language=pt-BR`
+loadSerie(loadApi)
+
 function searchSerie() {
   formInput.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -137,9 +140,7 @@ async function loadEpisode(id, wrapperSerie) {
         episode.name,
         wrapperSerie
       )
-    } else {
-      console.log('Não possui episódios cadastrados')
-    }
+    } 
   })
 }
 
@@ -164,6 +165,10 @@ function createEpisode(src, number_episode, title, wrapperSerie) {
   titleEpisode.className = 'title-episode'
   titleEpisode.textContent = title
   wrapperEpisode.appendChild(titleEpisode)
+
+  containerEpisode.addEventListener('click', (event) => {
+    event.stopPropagation()
+  })
 
   wrapperEpisode.addEventListener('click', (event) => {
     event.stopPropagation()

@@ -7,7 +7,7 @@
   list-style: none;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
-  /* user-select: none; */
+  user-select: none;
   color: #fff;
 }
 :root {
@@ -238,6 +238,7 @@ form button > i {
 .container-episode {
   position: relative;
   max-width: 100%;
+  cursor: auto;
 }
 
 .wrapper-episode {
@@ -253,6 +254,7 @@ form button > i {
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1em;
   border-radius: 10px;
+  
 }
 .wrapper-episode {
   opacity: 1;
@@ -534,9 +536,12 @@ form button > i {
     margin: 0 0 0 16rem;
     max-width: calc(100% - 16rem);
   }
+  .content-serie > img {
+    border-radius: 15px;
+  }
 
   button {
-    right: 70px;
+    right: 75px;
   }
 }
 
