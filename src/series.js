@@ -57,6 +57,11 @@ async function loadSerie(api) {
         }
         wrapperSerie.classList.toggle('active')
       })
+
+      if (window.innerWidth >= 1024) {
+        wrapperSerie.classList.add('active')
+        loadEpisode(serie.id, wrapperSerie);
+      }
     }
   })
 }
