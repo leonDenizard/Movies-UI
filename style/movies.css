@@ -20,6 +20,26 @@
     --font-h1-color: linear-gradient(to right, #d644ff, #ff0095, #ff651a, #e6b800);
 
 }
+body {
+  position: relative;
+  min-height: 100svh;
+  background-color: var(--background-color);
+  scroll-behavior: smooth;
+}
+body::-webkit-scrollbar {
+  width: 15px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  cursor: pointer;
+  border: 4px solid #0a0908;
+}
 
 @media (max-width: 475px) {
     html{

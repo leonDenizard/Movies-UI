@@ -543,6 +543,10 @@ form button > i {
   button {
     right: 75px;
   }
+
+  .wrapper-episode .img-episode {
+    max-height: 5.5rem;
+  }
 }
 
 @media(min-width: 1536px){
