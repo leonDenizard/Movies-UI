@@ -156,3 +156,4 @@ function createClearFavourites(){
     
 }
 const loadDiv = document.getElementById('load');
+loadDiv.style.display = 'none';
